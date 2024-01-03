@@ -1,0 +1,615 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6687B86A-6A2A-44BC-9548-44A904332EC4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>StyleBase</RootNamespace>
+    <AssemblyName>StyleBase</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\000_exe\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="halcondotnet, Version=20.11.0.0, Culture=neutral, PublicKeyToken=4973bed59ddbf2b8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\Administrator\Desktop\halcondotnet.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>IconStyle\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="WpfAnimatedGif, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\000_exe\Debug\WpfAnimatedGif.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="02NavFrm\NavFrm.xaml.cs">
+      <DependentUpon>NavFrm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="04FooterFrm\FooterFrm.xaml.cs">
+      <DependentUpon>FooterFrm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="03LayoutFrm\2、Process\Processbar.xaml.cs">
+      <DependentUpon>Processbar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="03LayoutFrm\1、ToolBar\2、ModuleProject\CursorTool.cs" />
+    <Compile Include="03LayoutFrm\1、ToolBar\1、AddProject\AddProject.xaml.cs">
+      <DependentUpon>AddProject.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="03LayoutFrm\1、ToolBar\2、ModuleProject\ModuleProject.xaml.cs">
+      <DependentUpon>ModuleProject.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="01HeaderFrm\TitleFrm.xaml.cs">
+      <DependentUpon>TitleFrm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="01HeaderFrm\Limits\AuthorityChange.xaml.cs">
+      <DependentUpon>AuthorityChange.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CommonBase.cs" />
+    <Compile Include="03LayoutFrm\2、Process\ControlProcess.xaml.cs">
+      <DependentUpon>ControlProcess.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="02NavFrm\CommunaPart\CommunTcpServer.xaml.cs">
+      <DependentUpon>CommunTcpServer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="02NavFrm\CommunaPart\CommunTcpClient.xaml.cs">
+      <DependentUpon>CommunTcpClient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="02NavFrm\CommunaPart\CommunUdpClient.xaml.cs">
+      <DependentUpon>CommunUdpClient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="02NavFrm\CommunaPart\CommunCom.xaml.cs">
+      <DependentUpon>CommunCom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="07LoadWindow\LoadWindow.xaml.cs">
+      <DependentUpon>LoadWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="03LayoutFrm\1、ToolBar\1、AddProject\FrmReName.xaml.cs">
+      <DependentUpon>FrmReName.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="02NavFrm\FrmSysSet.xaml.cs">
+      <DependentUpon>FrmSysSet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="07LoadWindow\LongTimeTask.cs" />
+    <Compile Include="02NavFrm\SolutionList\FrmSolutionList.xaml.cs">
+      <DependentUpon>FrmSolutionList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="02NavFrm\SolutionList\SolutionList.cs" />
+    <Compile Include="03LayoutFrm\1、ToolBar\1、AddProject\SetProject.xaml.cs">
+      <DependentUpon>SetProject.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="01HeaderFrm\FrmHeaderTitle.xaml.cs">
+      <DependentUpon>FrmHeaderTitle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="01HeaderFrm\Limits\PasswordSet.xaml.cs">
+      <DependentUpon>PasswordSet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustControl\UcAaSTxt.xaml.cs">
+      <DependentUpon>UcAaSTxt.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustControl\UcRadDoubleFrm.xaml.cs">
+      <DependentUpon>UcRadDoubleFrm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustControl\RoiCheckFrm.xaml.cs">
+      <DependentUpon>RoiCheckFrm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustControl\LinkDataVar\UcLinkDataVar.xaml.cs">
+      <DependentUpon>UcLinkDataVar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustControl\ShowDataVar\ShowDataVarFrm.xaml.cs">
+      <DependentUpon>ShowDataVarFrm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustControl\ShowDataVar\ShowDataVarViewModel.cs" />
+    <Compile Include="ViewModel\SetProjectViewModel.cs" />
+    <Compile Include="ViewModel\SolutionListViewModel.cs" />
+    <Compile Include="ViewModel\SysSetViewModel.cs" />
+    <Compile Include="ViewModel\ReNameToolViewModel.cs" />
+    <Compile Include="ViewModel\LinkDataVarViewModel.cs" />
+    <Compile Include="ModuleNode.cs" />
+    <Compile Include="CustControl\SuperButton.xaml.cs">
+      <DependentUpon>SuperButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="06NotifyBox\NotifyBox.xaml.cs">
+      <DependentUpon>NotifyBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustControl\UcTxtAddandSub.xaml.cs">
+      <DependentUpon>UcTxtAddandSub.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\ControlProcessViewModel.cs" />
+    <Compile Include="02NavFrm\FrmLayout.xaml.cs">
+      <DependentUpon>FrmLayout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="03LayoutFrm\4、DeviceConnect\DeviceConnect.xaml.cs">
+      <DependentUpon>DeviceConnect.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\LayoutViewModel.cs" />
+    <Compile Include="ViewModel\DeviceConnectViewModel.cs" />
+    <Compile Include="ViewModel\LinkProcessViewModel.cs" />
+    <Compile Include="ViewModel\CommunaCationViewModel.cs" />
+    <Compile Include="CustControl\LinkVarFrm.xaml.cs">
+      <DependentUpon>LinkVarFrm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustControl\UcOutPutInfo.xaml.cs">
+      <DependentUpon>UcOutPutInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustControl\UcCmbCheck.xaml.cs">
+      <DependentUpon>UcCmbCheck.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="05ClosedFrm\FrmClosed.xaml.cs">
+      <DependentUpon>FrmClosed.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="02NavFrm\FrmCommunaCation.xaml.cs">
+      <DependentUpon>FrmCommunaCation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\LinkVarViewModel.cs" />
+    <Compile Include="ViewModel\AddProjectViewModel.cs" />
+    <Compile Include="ViewModel\AddProViewModel.cs" />
+    <Compile Include="Helper\DataChange.cs" />
+    <Compile Include="ViewModel\FooterViewModel.cs" />
+    <Compile Include="Model\DataVarModel.cs" />
+    <Compile Include="ViewModel\DataSetViewModel.cs" />
+    <Compile Include="Helper\LayDatagrid.cs" />
+    <Compile Include="Helper\DataGridHelper.cs" />
+    <Compile Include="Model\CameraModel.cs" />
+    <Compile Include="CloneObject.cs" />
+    <Compile Include="ViewModel\CreatePrjViewModel.cs" />
+    <Compile Include="Model\CreatePrjModel.cs" />
+    <Compile Include="CustControl\UcNumUpDowm.xaml.cs">
+      <DependentUpon>UcNumUpDowm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="03LayoutFrm\1、ToolBar\1、AddProject\FrmAddPro.xaml.cs">
+      <DependentUpon>FrmAddPro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="02NavFrm\FrmCreateProject.xaml.cs">
+      <DependentUpon>FrmCreateProject.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="02NavFrm\FrmCamera.xaml.cs">
+      <DependentUpon>FrmCamera.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="02NavFrm\FrmDataSet.xaml.cs">
+      <DependentUpon>FrmDataSet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="03LayoutFrm\Tool\ElementTool.cs" />
+    <Compile Include="03LayoutFrm\2、Process\ImageTool.cs" />
+    <Compile Include="03LayoutFrm\3、Image\LogTool.xaml.cs">
+      <DependentUpon>LogTool.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\NavFrmModel.cs" />
+    <Compile Include="ModuleToolNode.cs" />
+    <Compile Include="ViewModel\NavViewModel.cs" />
+    <Compile Include="ViewModel\HeaderFrmViewModel.cs" />
+    <Compile Include="Model\HeaderFrmModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="03LayoutFrm\1、ToolBar\Toolbar.xaml.cs">
+      <DependentUpon>Toolbar.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="IconStyle\iconfont.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibBase\ClassLibBase.csproj">
+      <Project>{af0e2684-5e14-4a8f-8d5b-950515c7ac9b}</Project>
+      <Name>ClassLibBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{77ed73e8-1d87-40a0-a37a-b5c1ee2ce586}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CommunaCation\CommunaCation.csproj">
+      <Project>{1d599386-d6a4-4ff8-96b4-a873a41ba73d}</Project>
+      <Name>CommunaCation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\halcon控件\HWindow_Tool.csproj">
+      <Project>{9baa53fd-89b5-43e2-ac59-a27b006debb6}</Project>
+      <Name>HWindow_Tool</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ModuleCamera\ModuleCamera.csproj">
+      <Project>{a0deef78-814f-451c-8089-455b4184a894}</Project>
+      <Name>ModuleCamera</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ModuleDataVar\ModuleDataVar.csproj">
+      <Project>{e0b10532-137b-4a68-8e31-91f9b071e6b5}</Project>
+      <Name>ModuleDataVar</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SysHelper\SysHelper.csproj">
+      <Project>{79be596b-aa63-4b18-8212-0145905965d3}</Project>
+      <Name>SysHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VisionCore\VisionCore.csproj">
+      <Project>{fdc52fe5-aa83-44ee-aa8e-61c366f58723}</Project>
+      <Name>VisionCore</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="04FooterFrm\FooterFrm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="03LayoutFrm\1、ToolBar\1、AddProject\FrmAddPro.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="02NavFrm\FrmCreateProject.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="02NavFrm\FrmCamera.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="02NavFrm\FrmDataSet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="03LayoutFrm\1、ToolBar\1、AddProject\AddProject.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="05ClosedFrm\FrmClosed.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="02NavFrm\FrmCommunaCation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="02NavFrm\FrmLayout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="03LayoutFrm\4、DeviceConnect\DeviceConnect.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="03LayoutFrm\2、Process\ControlProcess.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="02NavFrm\CommunaPart\CommunTcpServer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="02NavFrm\CommunaPart\CommunTcpClient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="02NavFrm\CommunaPart\CommunUdpClient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="02NavFrm\CommunaPart\CommunCom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="03LayoutFrm\1、ToolBar\1、AddProject\FrmReName.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="02NavFrm\SolutionList\FrmSolutionList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="01HeaderFrm\FrmHeaderTitle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="01HeaderFrm\Limits\AuthorityChange.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FrmStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="02NavFrm\NavFrm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="03LayoutFrm\1、ToolBar\Toolbar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="03LayoutFrm\2、Process\Processbar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustControl\UcNumUpDowm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="03LayoutFrm\3、Image\LogTool.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="03LayoutFrm\1、ToolBar\2、ModuleProject\ModuleProject.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="01HeaderFrm\TitleFrm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustControl\LinkVarFrm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustControl\UcOutPutInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustControl\UcCmbCheck.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustControl\SuperButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="06NotifyBox\NotifyBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="07LoadWindow\LoadWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustControl\UcTxtAddandSub.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="02NavFrm\FrmSysSet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="03LayoutFrm\1、ToolBar\1、AddProject\SetProject.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="01HeaderFrm\Limits\PasswordSet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustControl\UcAaSTxt.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustControl\UcRadDoubleFrm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustControl\RoiCheckFrm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustControl\LinkDataVar\UcLinkDataVar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustControl\ShowDataVar\ShowDataVarFrm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\图片.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\颜色增强.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\直线测量.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\模板匹配.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\一维码.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\时间.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\圆形测量.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\二维码.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\N点标定.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\标定引用.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\文本发送.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\文本接收.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\工具箱.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgConMenu\删除.png" />
+    <Resource Include="03LayoutFrm\ImgConMenu\复制.png" />
+    <Resource Include="03LayoutFrm\ImgConMenu\粘贴.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\畸变校正.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\VB脚本.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\测量标定.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\线线距离.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\线线交点.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\点线构建.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\创建ROI.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\采集图像.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\存储图像.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\取消.png" />
+    <Resource Include="03LayoutFrm\ImgRes\确定.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\预先处理.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\点点构建.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\PLC写入.png" />
+    <Resource Include="03LayoutFrm\ImgRes\PLC读取.png" />
+    <Resource Include="03LayoutFrm\ImgRes\PLC通讯.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="IconStyle\loading.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\文件夹.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\数据入队.png" />
+    <Resource Include="03LayoutFrm\ImgRes\数据出队.png" />
+    <Resource Include="03LayoutFrm\ImgRes\清空队列.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgConMenu\Collapse.png" />
+    <Resource Include="03LayoutFrm\ImgConMenu\Expand.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\否则.png" />
+    <Resource Include="03LayoutFrm\ImgRes\否则如果.png" />
+    <Resource Include="03LayoutFrm\ImgRes\如果.png" />
+    <Resource Include="03LayoutFrm\ImgRes\结束.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\变量定义.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgConMenu\禁用.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\禁用.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgConMenu\启用.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgConMenu\重命名.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\位置补正.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgConMenu\N点标定.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgConMenu\旋转中心.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\图像脚本.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\CSV存储.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\机械手控制.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\仿射变换.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\切换方案.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\斑点分析.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\Halcon畸变标定.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\执行流程.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\图像合并.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\极坐标图像.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="03LayoutFrm\ImgRes\循环开始.png" />
+    <Resource Include="03LayoutFrm\ImgRes\循环结束.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="IconStyle\Microsoft.Xaml.Behaviors.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

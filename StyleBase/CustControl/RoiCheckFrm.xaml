@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="StyleBase.RoiCheckFrm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:StyleBase"
+             mc:Ignorable="d">
+    <Grid>
+        <!--内容-->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <RadioButton 
+                     FontSize="13" 
+                     VerticalContentAlignment="Center" 
+                     HorizontalAlignment="Center" 
+                     Grid.Column="0"
+                     IsChecked="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=Rect1Check,Mode=TwoWay}"
+                     Content="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=Rect1,Mode=TwoWay}"
+                     Checked="RadioButton_Checked"/>
+            <RadioButton 
+                     FontSize="13" 
+                     VerticalContentAlignment="Center" 
+                     HorizontalAlignment="Center" 
+                     Grid.Column="1"
+                     IsChecked="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=Rect2Check,Mode=TwoWay}"
+                     Content="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=Rect2,Mode=TwoWay}"
+                     Checked="RadioButton_Checked"/>
+            <RadioButton 
+                     FontSize="13" 
+                     VerticalContentAlignment="Center" 
+                     HorizontalAlignment="Center" 
+                     Grid.Column="2"
+                     IsChecked="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=CircleCheck,Mode=TwoWay}"
+                     Content="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=Circle,Mode=TwoWay}"
+                     Checked="RadioButton_Checked"/>
+        </Grid>
+    </Grid>
+</UserControl>

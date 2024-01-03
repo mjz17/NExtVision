@@ -1,0 +1,55 @@
+﻿<Button x:Class="VisionCore.CorrugButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VisionCore"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Button.Resources>
+        <Style TargetType="Border" x:Key="borderStyle">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="1.002,0.498" StartPoint="-0.024,0.502">
+                        <GradientStop Color="#00796B" Offset="0.0"/>
+                        <GradientStop Color="#066A5F" Offset="0.25"/>
+                        <GradientStop Color="#09655B" Offset="0.5"/>
+                        <GradientStop Color="#0C5D54" Offset="0.75"/>
+                        <GradientStop Color="#124F48" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Button.Resources>
+    
+    <Button.Template>
+        <ControlTemplate TargetType="Button">
+            <Grid ClipToBounds="True" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+                <Border Name="back" CornerRadius="6" Style="{StaticResource borderStyle}">
+                    <ContentPresenter 
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Content="{TemplateBinding Content}"/>
+                </Border>
+                <Path Fill="White" x:Name="MyPath">
+                    <Path.Data>
+                        <EllipseGeometry x:Name="MyEllipse" RadiusX="0" RadiusY="{Binding RelativeSource={RelativeSource Mode=Self},Path=RadiusX}"/>
+                    </Path.Data>
+                </Path>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="back" Property="Visibility" Value="Visible"/>
+                    <Setter TargetName="back" Property="Background" Value="#124F48"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter TargetName="back" Property="Background" Value="#44FFFFFF"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Button.Template>
+    
+    <Grid>
+            
+    </Grid>
+</Button>

@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="Plugin.LogicCycleStart.StartToEnd"
+             xmlns:stylefrm="clr-namespace:StyleBase;assembly=StyleBase"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Plugin.LogicCycleStart"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary Source="pack://application:,,,/StyleBase;component/FrmStyle.xaml"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <stylefrm:UcLinkDataVar 
+            Grid.Row="0"
+            CustName="初始值Start：" 
+            DataType="Int"
+            DispVar="{Binding StartValue,Mode=TwoWay}"
+            ModuleID="{Binding CurrentModelID,Mode=TwoWay}"  
+            LinkValue="UcDataLink_Global_StartValue"/>
+        <stylefrm:UcLinkDataVar 
+            Grid.Row="1" 
+            CustName="结束值End："  
+            DataType="Int"
+            DispVar="{Binding EndValue,Mode=TwoWay}"
+            ModuleID="{Binding CurrentModelID,Mode=TwoWay}"  
+            LinkValue="UcDataLink_Global_EndValue"/>
+    </Grid>
+</UserControl>

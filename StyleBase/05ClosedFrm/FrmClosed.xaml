@@ -1,0 +1,72 @@
+﻿<Window x:Class="StyleBase.FrmClosed"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:StyleBase"
+             mc:Ignorable="d" 
+             WindowStyle="None"    
+             ResizeMode="NoResize"
+             WindowStartupLocation="CenterScreen"
+             Height="216" Width="384">
+    <Window.Resources>
+        <ResourceDictionary Source="pack://application:,,,/StyleBase;component/FrmStyle.xaml"/>
+    </Window.Resources>
+    <Border Style="{StaticResource borderStyle}">
+        <Border BorderThickness="2">
+            <Grid Background="#212121">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32"/>
+                <RowDefinition/>
+                <RowDefinition Height="54"/>
+            </Grid.RowDefinitions>
+            <!--表头-->
+            <local:TitleFrm HeadName="请确认" MinVis="Collapsed" MaxVis="Collapsed" CloseWindow="TitleFrm_CloseWindow"/>
+            <!--内容-->
+                <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                    <Label Content="&#xed19;" FontFamily="pack://application:,,,/StyleBase;component/IconStyle/#iconfont" Foreground="Orange" FontSize="48"/>
+                    <TextBlock 
+                        Foreground="White"
+                        FontSize="16"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Text="当前解决方案未保存，是否要保存！"/>
+            </StackPanel>
+            <!--结尾-->
+            <Border Grid.Row="2" BorderBrush="White" BorderThickness="0,1,0,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                        <local:SuperButton
+                            Background="Transparent"
+                            Height="32" Width="80" 
+                            Content="是"
+                            Foreground="White"  
+                            x:Name="btn_Yes"
+                            Click="btn_Yes_Click"
+                            Grid.Column="0"/>
+                        <local:SuperButton
+                            Background="Transparent"
+                            Height="32" Width="80"    
+                            Content="否"   
+                            Foreground="White"  
+                            x:Name="btn_No" 
+                            Click="btn_No_Click"
+                            Grid.Column="1"/>
+                        <local:SuperButton
+                            Background="Transparent"
+                            Height="32" Width="80" 
+                            Content="取消"           
+                            Foreground="White"  
+                            x:Name="btn_Cancel"        
+                            Click="btn_Cancel_Click"
+                            Grid.Column="2"/>
+                </Grid>
+            </Border>
+        </Grid>
+        </Border>
+    </Border>
+</Window>

@@ -1,0 +1,191 @@
+﻿<servier:PluginFrmBase 
+             xmlns:stylefrm="clr-namespace:StyleBase;assembly=StyleBase"
+             xmlns:servier="clr-namespace:VisionCore;assembly=VisionCore"
+             x:Class="Plugin.SaveCSV.ModuleFrm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Plugin.SaveCSV"
+             mc:Ignorable="d" 
+             WindowStyle="None"
+             ResizeMode="NoResize"
+             WindowStartupLocation="CenterScreen"
+             Height="540" Width="960">
+
+    <servier:PluginFrmBase.Resources>
+        <ResourceDictionary Source="pack://application:,,,/StyleBase;component/FrmStyle.xaml"/>
+    </servier:PluginFrmBase.Resources>
+
+    <Border Style="{StaticResource borderStyle}">
+        <Border BorderThickness="2 0 2 2">
+            <Grid Background="White">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="32"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="54"/>
+                </Grid.RowDefinitions>
+                <!--表头-->
+                <stylefrm:TitleFrm Grid.Row="0" Name="Title" HeadName="CSV存储" MinVis="Collapsed" MaxVis="Collapsed" CloseWindow="Title_CloseWindow"/>
+                <!--内容-->
+                <Border Grid.Row="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="150"/>
+                        </Grid.ColumnDefinitions>
+                        <!--通讯设置-->
+                        <Border Grid.Column="0" Style="{StaticResource borderStyle}" Margin="1">
+                            <Grid Background="White" Margin="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="26"/>
+                                    <RowDefinition Height="34"/>
+                                    <RowDefinition Height="34"/>
+                                    <RowDefinition Height="34"/>
+                                    <RowDefinition Height="34"/>
+                                    <RowDefinition Height="34"/>
+                                    <RowDefinition Height="34"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <!--表头-->
+                                <Border Style="{StaticResource borderStyle}" Grid.Row="0">
+                                    <TextBlock Text="选型设置" Foreground="White" VerticalAlignment="Center" Margin="5" HorizontalAlignment="Left" FontSize="13"/>
+                                </Border>
+                                <Border Grid.Row="1">
+                                    <stylefrm:UcAaSTxt numHeadName="小数位数" minValue="1" maxValue="100" midValue="1"/>
+                                </Border>
+                                <CheckBox Grid.Row="2" 
+                                      Content="是否清理" 
+                                      Name="Chk_FileStatus" 
+                                      VerticalContentAlignment="Center" 
+                                      FontSize="13" Margin="4 0 0 0"/>
+                                <Border Grid.Row="3">
+                                    <stylefrm:UcAaSTxt
+                                        Name="X_Move"
+                                        numHeadName="保留天数" 
+                                        Grid.Row="1" minValue="1" maxValue="25" midValue="1"
+                                        ControlValue="{Binding ClearTime,Mode=TwoWay}"/>
+                                </Border>
+                                <Border Grid.Row="4">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="2*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Content="文件名称" VerticalContentAlignment="Center"/>
+                                        <TextBox 
+                                            Height="32" Width="170" 
+                                            Grid.Column="1"
+                                            HorizontalAlignment="Left" 
+                                            Name="Txt_FileName" Text="数据记录" FontSize="13" VerticalContentAlignment="Center"/>
+                                    </Grid>
+                                </Border>
+                                <CheckBox Grid.Row="5" 
+                                      Content="自定义列头" 
+                                      Name="Chk_Custom" 
+                                      VerticalContentAlignment="Center" 
+                                      FontSize="13" Margin="4 0 0 0"/>
+                                <Border Grid.Row="6">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="2*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Content="列头名称" VerticalContentAlignment="Center"/>
+                                        <TextBox 
+                                            Height="32" Width="170" 
+                                            Grid.Column="1"
+                                            HorizontalAlignment="Left" 
+                                            Name="Txt_ColumnHead" Text="数据1/数据2/" FontSize="13" VerticalContentAlignment="Center"/>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </Border>
+                        <!--变量列表-->
+                        <Grid Grid.Column="1" Margin="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="100"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0"  Margin="10 0 10 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="存储路径" FontSize="13" Grid.Column="0" VerticalContentAlignment="Center"/>
+                                <TextBox 
+                                    Grid.Column="1"
+                                    Name="txt_SavePath"
+                                    Height="32" 
+                                    VerticalContentAlignment="Center"
+                                    ContextMenu="{x:Null}" BorderThickness="1"/>
+                                <Button 
+                                    Name="btn_SearchFolder"
+                                    Background="White"
+                                    Content="&#xe86e;" 
+                                    Style="{StaticResource Add_Btn}" 
+                                    Grid.Column="2"  
+                                    Height="32" Width="46"
+                                    Click="btn_SearchFolder_Click"/>
+                            </Grid>
+                            <Border Background="White" Margin="2" Grid.Row="1">
+                                <stylefrm:LayDatagrid
+                                    Background="White"
+                                    x:Name="dgv_PlcData" 
+                                    AutoGenerateColumns="False"                                         
+                                    CanUserAddRows="False" 
+                                    CanUserSortColumns="False"
+                                    SelectionMode="Single" 
+                                    FontSize="13" 
+                                    IsReadOnly="False"
+                                    ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                    ScrollViewer.VerticalScrollBarVisibility="Hidden"    
+                                    GridLinesVisibility="None"              
+                                    ColumnHeaderHeight="32"
+                                    RowHeight="32"
+                                    CellStyle="{StaticResource DatagridStyle}"
+                                    RowStyle="{StaticResource DatagridRowStyle}"
+                                    ColumnHeaderStyle="{StaticResource DatagridHead}">
+                                    <DataGrid.Columns >
+                                        <DataGridTextColumn Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow},Path=(stylefrm:DataGridHelper.RowIndex)}"  Header="索引" Width="0.5*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Binding="{Binding m_DataType,Mode=TwoWay}" Header="类型" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Binding="{Binding m_DataName,Mode=TwoWay}" Header="名称" Width="*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Binding="{Binding m_DataTip,Mode=TwoWay}" Header="链接" Width="*" IsReadOnly="True"/>
+                                    </DataGrid.Columns>
+                                </stylefrm:LayDatagrid>
+                            </Border>
+                        </Grid>
+                        <!--操作按钮-->
+                        <Border Grid.Column="2" Style="{StaticResource borderStyle}" Margin="1">
+                            <Border Background="White" Margin="2">
+                                <StackPanel>
+                                    <stylefrm:SuperButton 
+                                        Height="36" Width="100" 
+                                        Content="添加" 
+                                        Foreground="White" Margin="0 5"
+                                        Name="btn_Add" Click="btn_Add_Click"/>
+                                    <stylefrm:SuperButton 
+                                        Height="36" Width="100" 
+                                        Content="删除" Foreground="White" Margin="0 5"
+                                        Name="btn_Delete" Click="btn_Delete_Click"/>
+                                    <stylefrm:SuperButton 
+                                        Height="36" Width="100" 
+                                        Content="上移" Foreground="White" Margin="0 5"
+                                        Name="btn_Up" Click="btn_Up_Click"/>
+                                    <stylefrm:SuperButton 
+                                        Height="36" Width="100" 
+                                        Content="下移" Foreground="White" Margin="0 5"
+                                        Name="btn_Down" Click="btn_Down_Click"/>
+                                </StackPanel>
+                            </Border>
+                        </Border>
+                    </Grid>
+                </Border>
+                <!--结尾-->
+                <servier:ModuleFrmBase Grid.Row="2" RunBtnVisibility="Hidden"/>
+            </Grid>
+        </Border>
+    </Border>
+</servier:PluginFrmBase>

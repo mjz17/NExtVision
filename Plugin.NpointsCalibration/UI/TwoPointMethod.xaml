@@ -1,0 +1,75 @@
+﻿<UserControl 
+             xmlns:stylefrm="clr-namespace:StyleBase;assembly=StyleBase"
+             x:Class="Plugin.NpointsCalibration.TwoPointMethod"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Plugin.NpointsCalibration"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary Source="pack://application:,,,/StyleBase;component/FrmStyle.xaml"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="34"/>
+            <RowDefinition Height="34"/>
+            <RowDefinition Height="34"/>
+            <RowDefinition Height="34"/>
+            <RowDefinition Height="34"/>
+            <RowDefinition Height="34"/>
+            <RowDefinition Height="34"/>
+            <RowDefinition Height="34"/>
+        </Grid.RowDefinitions>
+        <stylefrm:UcTxtAddandSub 
+            Grid.Row="0" 
+            numHeadName="位置X1(mm)" 
+            minValue="-5000"
+            maxValue="5000" 
+            ControlValue="{Binding PostionX1,Mode=TwoWay}"
+            TextValueEvent="UcTxtAddandSub_TextValueEvent"/>
+        <stylefrm:UcTxtAddandSub 
+            Grid.Row="1" 
+            numHeadName="位置Y1(mm)"
+            minValue="-5000"
+            maxValue="5000" 
+            ControlValue="{Binding PostionY1,Mode=TwoWay}"
+            TextValueEvent="UcTxtAddandSub_TextValueEvent_1"/>
+        <stylefrm:UcTxtAddandSub
+            Grid.Row="2"
+            numHeadName="位置X2(mm)"
+            minValue="-5000" 
+            maxValue="5000"
+            ControlValue="{Binding PostionX2,Mode=TwoWay}"
+            TextValueEvent="UcTxtAddandSub_TextValueEvent_2"/>
+        <stylefrm:UcTxtAddandSub 
+            Grid.Row="3" 
+            numHeadName="位置Y1(mm)"
+            minValue="-5000"
+            maxValue="5000" 
+            ControlValue="{Binding PostionY2,Mode=TwoWay}"
+            TextValueEvent="UcTxtAddandSub_TextValueEvent_3"/>
+        <stylefrm:UcTxtAddandSub
+            Grid.Row="4" 
+            numHeadName="旋转角度()"
+            minValue="-5000" 
+            maxValue="5000" 
+            ControlValue="{Binding PostionPhi,Mode=TwoWay}"
+            TextValueEvent="UcTxtAddandSub_TextValueEvent_4"/>
+        <stylefrm:SuperButton
+            Grid.Row="5" 
+            Content="执行两点标定"
+            Foreground="White" 
+            Height="30" 
+            Width="80"
+            Click="SuperButton_Click"/>
+        <stylefrm:UcOutPutInfo
+            Grid.Row="6" 
+            HeadName="MarkX(mm)" 
+            DispName="{Binding PostionCenterX,Mode=TwoWay}"/>
+        <stylefrm:UcOutPutInfo 
+            Grid.Row="7" 
+            HeadName="MarkY(mm)" 
+            DispName="{Binding PostionCenterY,Mode=TwoWay}"/>
+    </Grid>
+</UserControl>

@@ -1,0 +1,526 @@
+﻿<servier:PluginFrmBase 
+             xmlns:stylefrm="clr-namespace:StyleBase;assembly=StyleBase"
+             xmlns:servier="clr-namespace:VisionCore;assembly=VisionCore"
+             xmlns:halconTool="clr-namespace:HalconControl;assembly=HWindow_Tool"
+             x:Class="Plugin.BlobAnalysis.ModuleFrm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Plugin.BlobAnalysis"
+             mc:Ignorable="d" 
+             WindowStyle="None"
+             ResizeMode="NoResize"
+             WindowStartupLocation="CenterScreen"
+             Height="540" Width="960">
+    <servier:PluginFrmBase.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/StyleBase;component/FrmStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <!--菜单外部样式-->
+            <Style TargetType="{x:Type ContextMenu}" x:Key="ContextAddPro">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate  TargetType="ContextMenu">
+                            <!--背景色-->
+                            <Border Name="bd" Background="#222021" BorderThickness="1" BorderBrush="Gray" Width="160">
+                                <ItemsPresenter/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!--中间横线-->
+            <Style x:Key="SeperatorTemplate" TargetType="Separator">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate  TargetType="Separator">
+                            <Border BorderBrush="White" BorderThickness="0 0 0 1"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!--内部项-->
+            <Style x:Key="MenuItemTemplate" TargetType="MenuItem">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate  TargetType="MenuItem">
+                            <Border Name="Bt" Height="32" Background="Transparent">
+                                <Border Name="bd"  Height="32" Background="Transparent">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock 
+                                            Grid.Column="0"
+                                            x:Name="tb"
+                                            Margin="10,0,10,0" 
+                                            Foreground="White"
+                                            FontSize="13" 
+                                            VerticalAlignment="Center" 
+                                            Text="{Binding Header, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                        <Path  
+                                            Grid.Column="1"
+                                            Visibility="Collapsed" 
+                                            x:Name="_path" 
+                                            HorizontalAlignment="Center"  
+                                            Margin="0 15 0 0"   
+                                            Data="M0,6 6,0 0,-6 z" 
+                                            Fill="Gray"/>
+                                        <Popup  
+                                            Placement="Right" 
+                                            x:Name="SubMenuPopup"
+                                            AllowsTransparency="True"   
+                                            Focusable="False" 
+                                            IsOpen="{TemplateBinding IsSubmenuOpen}">
+                                            <ScrollViewer   
+                                                ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                                                ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                                <Border Background="#222021" 
+                                                        Name="SubmenuBorder" 
+                                                        SnapsToDevicePixels="True" Width="160">
+                                                    <StackPanel  
+                                                        IsItemsHost="True"   
+                                                        KeyboardNavigation.DirectionalNavigation="Cycle" />
+                                                </Border>
+                                            </ScrollViewer>
+                                        </Popup>
+                                    </Grid>
+                                </Border>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Bt" Property="Background" Value="gray" />
+                                    <Setter TargetName="_path" Property="Fill" Value="White"/>
+                                </Trigger>
+                                <Trigger Property="HasItems" Value="true">
+                                    <Setter TargetName="_path" Property="Visibility" Value="Visible"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!--内部项-->
+            <Style x:Key="MenuItemTemplate1" TargetType="MenuItem">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate  TargetType="MenuItem">
+                            <Border Name="Bt" Height="18" Background="Transparent">
+                                <Border Name="bd"  Height="18" Background="Transparent">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image x:Name="img" Stretch="None" Margin="10,0,10,0" Source="{Binding Icon, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                        <TextBlock x:Name="tb" Margin="0,0,10,0" Foreground="White" FontSize="13" VerticalAlignment="Center" Text="{Binding Header, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                    </StackPanel>
+                                </Border>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+        </ResourceDictionary>
+    </servier:PluginFrmBase.Resources>
+
+    <Border Style="{StaticResource borderStyle}">
+        <Border BorderThickness="2 0 2 2">
+            <Grid Background="White">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="32"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="54"/>
+                </Grid.RowDefinitions>
+                <!--表头-->
+                <stylefrm:TitleFrm Grid.Row="0" Name="Title" HeadName="Blob分析" MinVis="Collapsed" CloseWindow="Title_CloseWindow"/>
+                <!--正文-->
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="366"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <!--参数设定窗体-->
+                    <Grid Background="{StaticResource PrimaryBlueColor}" Name="grid" Grid.Row="2" Margin="1" Grid.Column="0">
+                        <Border 
+                        Background="{DynamicResource PrimaryTextColor}"
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Center">
+                            <TabControl                           
+                                Style="{DynamicResource TabControlStyle}" 
+                                Width="{Binding ElementName=grid, Path=ActualWidth}" 
+                                Height="{Binding ElementName=grid, Path=ActualHeight}"
+                                Name="tab_Control">
+                                <!--基本设置-->
+                                <TabItem Header="基本设置" Style="{DynamicResource TabItemStyle}">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="26"/>
+                                            <RowDefinition Height="34"/>
+
+                                            <RowDefinition Height="26"/>
+                                            <RowDefinition Height="26"/>
+                                            <RowDefinition Height="26"/>
+                                            <RowDefinition Height="26"/>
+                                            <RowDefinition Height="Auto"/>
+
+                                            <RowDefinition Height="26"/>
+                                            <RowDefinition Height="26"/>
+                                            <RowDefinition Height="26"/>
+                                            <RowDefinition Height="34"/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <!--表头-->
+                                        <Border Style="{StaticResource borderStyle}" VerticalAlignment="Top" Grid.Row="0">
+                                            <TextBlock Text="图像设置" Foreground="White" VerticalAlignment="Center" Margin="5" HorizontalAlignment="Left" FontSize="13"/>
+                                        </Border>
+                                        <stylefrm:UcLinkDataVar 
+                                            x:Name="Gen_ImgPath" 
+                                            Grid.Row="1" 
+                                            CustName="输入图像"    
+                                            DataType="Image"
+                                            DispVar="{Binding CurrentImage,Mode=TwoWay}"
+                                            ModuleID="{Binding CurrentModelID,Mode=TwoWay}"                                         
+                                            LinkValue="Gen_ImgPath_EValueAlarm"/>
+                                        <!--表头-->
+                                        <Border Style="{StaticResource borderStyle}" VerticalAlignment="Top" Grid.Row="2">
+                                            <TextBlock Text="工作模式" Foreground="White" VerticalAlignment="Center" Margin="5" HorizontalAlignment="Left" FontSize="13"/>
+                                        </Border>
+                                        <Grid Grid.Row="3">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <RadioButton Grid.Column="0" Name="Image_Model" Content="图像模式" FontSize="13" VerticalContentAlignment="Center" Click="Rad_Modelbtn_Click"/>
+                                            <RadioButton Grid.Column="1" Name="Region_Model" Content="区域模式" FontSize="13" VerticalContentAlignment="Center"  Click="Rad_Modelbtn_Click"/>
+                                        </Grid>
+                                        <!--信息-->
+                                        <Border Style="{StaticResource borderStyle}" VerticalAlignment="Top" Grid.Row="4">
+                                            <TextBlock Text="信息" Foreground="White" VerticalAlignment="Center" Margin="5" HorizontalAlignment="Left" FontSize="13"/>
+                                        </Border>
+                                        <Grid Grid.Row="5">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <RadioButton Grid.Column="0" Name="Draw_RoI" Content="ROI绘制" FontSize="13" VerticalContentAlignment="Center" Click="Rad_Drawbtn_Click"/>
+                                            <RadioButton Grid.Column="1" Name="Link_RoI" Content="ROI链接" FontSize="13" VerticalContentAlignment="Center"  Click="Rad_Drawbtn_Click"/>
+                                        </Grid>
+                                        <StackPanel Grid.Row="6" Orientation="Vertical" Visibility="{Binding m_Visibility,Mode=TwoWay}">
+                                            <stylefrm:UcLinkDataVar 
+                                                Height="34"
+                                                CustName="ROI：" 
+                                                DataType="区域"
+                                                DispVar="{Binding CurrentROI,Mode=TwoWay}" 
+                                                ModuleID="{Binding CurrentModelID,Mode=TwoWay}"                                         
+                                                LinkValue="Gen_Roi_EValueAlarm"/>
+                                            <stylefrm:UcLinkDataVar 
+                                                Height="34" 
+                                                CustName="索引：" 
+                                                DataType="Int"
+                                                DispVar="{Binding CurrentIndex,Mode=TwoWay}" 
+                                                ModuleID="{Binding CurrentModelID,Mode=TwoWay}" 
+                                                LinkValue="Gen_Index_EValueAlarm"/>
+                                        </StackPanel>
+                                        <!--表头-->
+                                        <Border Style="{StaticResource borderStyle}" VerticalAlignment="Top" Grid.Row="7">
+                                            <TextBlock Text="屏蔽区域" Foreground="White" VerticalAlignment="Center" Margin="5" HorizontalAlignment="Left" FontSize="13"/>
+                                        </Border>
+                                        <Grid Grid.Row="8">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition/>
+                                                    <RowDefinition/>
+                                                </Grid.RowDefinitions>
+                                            </Grid>
+                                            <Grid Grid.Row="0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition/>
+                                                </Grid.ColumnDefinitions>
+                                                <RadioButton Grid.Column="0" Content="手绘区域" FontSize="13" VerticalContentAlignment="Center"/>
+                                                <RadioButton Grid.Column="1" Content="链接区域" FontSize="13" VerticalContentAlignment="Center"/>
+                                            </Grid>
+
+                                        </Grid>
+                                        <!--表头-->
+                                        <Border Style="{StaticResource borderStyle}" VerticalAlignment="Top" Grid.Row="9">
+                                            <TextBlock Text="二值化" Foreground="White" VerticalAlignment="Center" Margin="5" HorizontalAlignment="Left" FontSize="13"/>
+                                        </Border>
+                                        <Grid Grid.Row="10">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="32"/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <Grid Grid.Row="0" Height="32">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition Width="54"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Grid.Column="0" Content="设置" FontSize="13" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
+                                                <ComboBox Grid.Column="1" Height="30" Width="120" Name="Cmb_Threshold" DropDownClosed="Cmb_Threshold_DropDownClosed"/>
+                                            </Grid>
+                                        </Grid>
+                                        <ContentControl Grid.Row="11" x:Name="Page_Change2"/>
+                                    </Grid>
+                                </TabItem>
+                                <!--预处理-->
+                                <TabItem Header="预先处理" Style="{DynamicResource TabItemStyle}">
+
+                                </TabItem>
+                                <!--区域参数-->
+                                <TabItem Header="区域参数" Style="{DynamicResource TabItemStyle}" HorizontalAlignment="Center">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="34"/>
+                                            <RowDefinition/>
+                                            <RowDefinition Height="26"/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                            <!--添加-->
+                                            <Button Height="30" Width="30" 
+                                                    Content="&#xe614;" Foreground="#1296db" FontSize="22"
+                                                    Style="{StaticResource Nav_Btn}" 
+                                                    Background="Transparent">
+                                                <Button.ContextMenu>
+                                                    <ContextMenu Style="{StaticResource ContextAddPro}">
+                                                        <MenuItem Style="{StaticResource MenuItemTemplate1}"/>
+                                                        <MenuItem Header="区域操作" Style="{StaticResource MenuItemTemplate}">
+                                                            <MenuItem Header="连通" Style="{StaticResource MenuItemTemplate}" Tag="0" Click="MenuItem_Click"/>
+                                                            <MenuItem Header="合并" Style="{StaticResource MenuItemTemplate}" Tag="1" Click="MenuItem_Click"/>
+                                                            <MenuItem Header="补集 " Style="{StaticResource MenuItemTemplate}" Tag="2" Click="MenuItem_Click"/>
+                                                            <MenuItem Header="相减" Style="{StaticResource MenuItemTemplate}" Tag="3" Click="MenuItem_Click"/>
+                                                            <MenuItem Header="相交" Style="{StaticResource MenuItemTemplate}" Tag="4" Click="MenuItem_Click"/>
+                                                            <MenuItem Header="空洞填充" Style="{StaticResource MenuItemTemplate}" Tag="5" Click="MenuItem_Click"/>
+                                                        </MenuItem>
+                                                        <MenuItem Header="形态学" Style="{StaticResource MenuItemTemplate}">
+                                                            <MenuItem Header="闭运算" Style="{StaticResource MenuItemTemplate}" Tag="6" Click="MenuItem_Click"/>
+                                                            <MenuItem Header="开运算" Style="{StaticResource MenuItemTemplate}" Tag="7" Click="MenuItem_Click"/>
+                                                            <MenuItem Header="腐蚀" Style="{StaticResource MenuItemTemplate}" Tag="8" Click="MenuItem_Click"/>
+                                                            <MenuItem Header="膨胀" Style="{StaticResource MenuItemTemplate}" Tag="9" Click="MenuItem_Click"/>
+                                                        </MenuItem>
+                                                        <MenuItem Header="高级操作" Style="{StaticResource MenuItemTemplate}">
+                                                            <MenuItem Header="特征筛选" Style="{StaticResource MenuItemTemplate}" Tag="10" Click="MenuItem_Click"/>
+                                                            <MenuItem Header="转换" Style="{StaticResource MenuItemTemplate}" Tag="11" Click="MenuItem_Click"/>
+                                                            <MenuItem Header="矩形分割" Style="{StaticResource MenuItemTemplate}" Tag="12" Click="MenuItem_Click"/>
+                                                            <MenuItem Header="动态分割" Style="{StaticResource MenuItemTemplate}" Tag="13" Click="MenuItem_Click"/>
+                                                        </MenuItem>
+                                                    </ContextMenu>
+                                                </Button.ContextMenu>
+                                            </Button>
+                                            <!--删除-->
+                                            <Button Height="30" Width="30" 
+                                                    Content="&#xe608;" Foreground="Red" FontSize="22"
+                                                    Style="{StaticResource Nav_Btn}" 
+                                                    Background="Transparent"
+                                                    Name="btn_Delet"
+                                                    Click="btn_Delet_Click"/>
+                                            <!--上移-->
+                                            <Button Height="30" Width="30" 
+                                                    Content="&#xe717;" Foreground="#1296db" FontSize="22"
+                                                    Style="{StaticResource Nav_Btn}" 
+                                                    Background="Transparent"
+                                                    Name="btn_Up"/>
+                                            <!--下移-->
+                                            <Button Height="30" Width="30" 
+                                                    Content="&#xe718;" 
+                                                    Foreground="#1296db" FontSize="22"
+                                                    Style="{StaticResource Nav_Btn}" 
+                                                    Background="Transparent"
+                                                    Name="btn_Down"/>
+                                        </StackPanel>
+                                        <Border Grid.Row="1">
+                                            <stylefrm:LayDatagrid
+                                                Background="White"
+                                                x:Name="dgv_Blob" 
+                                                AutoGenerateColumns="False"                                         
+                                                CanUserAddRows="False" 
+                                                CanUserSortColumns="False"
+                                                SelectionMode="Single" 
+                                                FontSize="13" 
+                                                IsReadOnly="True"
+                                                ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                                ScrollViewer.VerticalScrollBarVisibility="Hidden"        
+                                                GridLinesVisibility="None"              
+                                                ColumnHeaderHeight="32"
+                                                RowHeight="32"
+                                                MouseLeftButtonDown="dgv_Blob_MouseLeftButtonDown"
+                                                CellStyle="{StaticResource DatagridStyle}"
+                                                RowStyle="{StaticResource DatagridRowStyle}"
+                                                ColumnHeaderStyle="{StaticResource DatagridHead}">
+                                                <DataGrid.Columns >
+                                                    <DataGridCheckBoxColumn Header="启用" Width="50" Binding="{Binding Path=m_EnableOrnot,Mode=TwoWay}"/>
+                                                    <DataGridTextColumn Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow},Path=(stylefrm:DataGridHelper.RowIndex)}"  Header="序号" Width="50"/>
+                                                    <DataGridTextColumn Binding="{Binding Path=m_LinkIndex,Mode=TwoWay}" Header="使用" Width="80"/>
+                                                    <DataGridTextColumn Binding="{Binding Path=m_blobMethod,Mode=TwoWay}" Header="类型" Width="100"/>
+                                                    <DataGridTextColumn Binding="{Binding Path=m_Param,Mode=TwoWay}" Header="参数" Width="*"/>
+                                                </DataGrid.Columns>
+                                            </stylefrm:LayDatagrid>
+                                        </Border>
+                                        <!--表头-->
+                                        <Border Style="{StaticResource borderStyle}" VerticalAlignment="Top" Grid.Row="2">
+                                            <TextBlock Text="参数" Foreground="White" VerticalAlignment="Center" Margin="5" HorizontalAlignment="Left" FontSize="13"/>
+                                        </Border>
+                                        <ContentControl Grid.Row="3" x:Name="Page_Change"/>
+                                    </Grid>
+                                </TabItem>
+                                <!--处理结果-->
+                                <TabItem Header="处理结果" Style="{DynamicResource TabItemStyle}">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="26"/>
+                                            <RowDefinition  Height="34"/>
+                                            <RowDefinition Height="26"/>
+                                            <RowDefinition  Height="34"/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <!--表头-->
+                                        <Border Style="{StaticResource borderStyle}" VerticalAlignment="Top" Grid.Row="0">
+                                            <TextBlock Text="参数" Foreground="White" VerticalAlignment="Center" Margin="5" HorizontalAlignment="Left" FontSize="13"/>
+                                        </Border>
+                                        <Border Grid.Row="1">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="2*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <CheckBox Grid.Column="0" Content="特征排序" VerticalAlignment="Center" Name="chk_IsPort" Click="chk_IsPort_Click"/>
+                                                <ComboBox Grid.Column="1" Height="30" Width="120"/>
+                                                <CheckBox Grid.Column="2" Content="升序" VerticalAlignment="Center" Name="chk_Order" Click="chk_Order_Click"/>
+                                            </Grid>
+                                        </Border>
+                                        <!--表头-->
+                                        <Border Style="{StaticResource borderStyle}" VerticalAlignment="Top" Grid.Row="2">
+                                            <TextBlock Text="筛选结果" Foreground="White" VerticalAlignment="Center" Margin="5" HorizontalAlignment="Left" FontSize="13"/>
+                                        </Border>
+                                        <!--结果判断-->
+                                        <Grid Grid.Row="3" Height="32">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="120"/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Orientation="Horizontal"  Grid.Column="0">
+                                                <Button Grid.Column="0" Height="30" Width="30" 
+                                                        Content="&#xe614;" Foreground="#1296db" FontSize="22"
+                                                        Style="{StaticResource Nav_Btn}" 
+                                                        Background="Transparent">
+                                                    <Button.ContextMenu>
+                                                        <ContextMenu Style="{StaticResource ContextAddPro}">
+                                                            <MenuItem Style="{StaticResource MenuItemTemplate1}"/>
+                                                            <MenuItem Header="属性" Style="{StaticResource MenuItemTemplate}">
+                                                                <MenuItem Header="总面积" Style="{StaticResource MenuItemTemplate}" Tag="0" Click="Select_Click"/>
+                                                                <MenuItem Header="各个面积" Style="{StaticResource MenuItemTemplate}" Tag="1" Click="Select_Click"/>
+                                                                <MenuItem Header="个数" Style="{StaticResource MenuItemTemplate}" Tag="2" Click="Select_Click"/>
+                                                            </MenuItem>
+                                                            <MenuItem Style="{StaticResource MenuItemTemplate1}"/>
+                                                        </ContextMenu>
+                                                    </Button.ContextMenu>
+                                                </Button>
+                                                <Button Grid.Column="1" Height="30" Width="30" 
+                                                        Content="&#xe608;" Foreground="#1296db" FontSize="22"
+                                                        Style="{StaticResource Nav_Btn}" 
+                                                        Background="Transparent" Click="btn_Select_Detele_Click"/>
+                                                <Label Grid.Column="2" Content="条件关系：" FontSize="13" VerticalContentAlignment="Center"/>
+                                            </StackPanel>
+                                            <ComboBox Grid.Column="1" Height="28" Width="100" Name="cmb_shapeModel" DropDownClosed="cmb_shapeModel_DropDownClosed"/>
+                                        </Grid>
+                                        <Border Grid.Row="4">
+                                            <stylefrm:LayDatagrid
+                                                Background="White"
+                                                x:Name="dgv_Select" 
+                                                AutoGenerateColumns="False"                                         
+                                                CanUserAddRows="False" 
+                                                CanUserSortColumns="False"
+                                                SelectionMode="Single" 
+                                                FontSize="13" 
+                                                IsReadOnly="False"
+                                                ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                                ScrollViewer.VerticalScrollBarVisibility="Hidden"        
+                                                GridLinesVisibility="None"              
+                                                ColumnHeaderHeight="32"
+                                                RowHeight="32"
+                                                CellStyle="{StaticResource DatagridStyle}"
+                                                RowStyle="{StaticResource DatagridRowStyle}"
+                                                ColumnHeaderStyle="{StaticResource DatagridHead}">
+                                                <DataGrid.Columns >
+                                                    <DataGridTextColumn Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow},Path=(stylefrm:DataGridHelper.RowIndex)}"  Header="序号" Width="50"/>
+                                                    <DataGridCheckBoxColumn Header="启用" Width="50" Binding="{Binding Path=m_EnableOrnot,Mode=TwoWay}"/>
+                                                    <DataGridTextColumn Binding="{Binding Path=m_shapeType,Mode=TwoWay}" Header="特征" Width="80" IsReadOnly="True"/>
+                                                    <DataGridTextColumn Binding="{Binding Path=m_min,Mode=TwoWay}" Header="最小值" Width="50" IsReadOnly="False"/>
+                                                    <DataGridTextColumn Binding="{Binding Path=m_max,Mode=TwoWay}" Header="最大值" Width="50" IsReadOnly="False"/>
+                                                    <DataGridCheckBoxColumn Header="设为NG" Width="50" Binding="{Binding Path=m_EnableOrnot,Mode=TwoWay}"/>
+                                                </DataGrid.Columns>
+                                            </stylefrm:LayDatagrid>
+                                        </Border>
+                                    </Grid>
+                                </TabItem>
+                                <!--显示设置-->
+                                <TabItem Header="显示设置" Style="{DynamicResource TabItemStyle}">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="26"/>
+                                            <RowDefinition Height="34"/>
+                                            <RowDefinition Height="34"/>
+                                            <RowDefinition Height="34"/>
+                                        </Grid.RowDefinitions>
+                                        <!--表头-->
+                                        <Border Style="{StaticResource borderStyle}" VerticalAlignment="Top" Grid.Row="0">
+                                            <TextBlock Text="显示设置" Foreground="White" VerticalAlignment="Center" Margin="5" HorizontalAlignment="Left" FontSize="13"/>
+                                        </Border>
+                                        <CheckBox Grid.Row="1" Content="显示区域" VerticalContentAlignment="Center"/>
+                                        <CheckBox Grid.Row="2" Content="填充显示" VerticalContentAlignment="Center"/>
+                                        <CheckBox Grid.Row="3" Content="显示区域中心" VerticalContentAlignment="Center"/>
+                                    </Grid>
+                                </TabItem>
+                            </TabControl>
+                        </Border>
+                    </Grid>
+                    <!--图像窗体-->
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="3*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <WindowsFormsHost Grid.Row="0" Name="Frm_Hose1" Margin="1">
+                            <halconTool:HWindow_Final x:Name="Main_HalconView"/>
+                        </WindowsFormsHost>
+                        <Border Grid.Row="1">
+                            <stylefrm:LayDatagrid
+                                Background="White"
+                                x:Name="dgv_RegionFeature" 
+                                AutoGenerateColumns="False"                                         
+                                CanUserAddRows="False" 
+                                CanUserSortColumns="False"
+                                SelectionMode="Single" 
+                                FontSize="13" 
+                                IsReadOnly="True"       
+                                GridLinesVisibility="None"              
+                                ColumnHeaderHeight="32"
+                                RowHeight="32"
+                                CellStyle="{StaticResource DatagridStyle}"
+                                RowStyle="{StaticResource DatagridRowStyle}"
+                                ColumnHeaderStyle="{StaticResource DatagridHead}">
+                                <DataGrid.Columns >
+                                    <DataGridTextColumn Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow},Path=(stylefrm:DataGridHelper.RowIndex)}"  Header="索引" Width="50"/>
+                                    <DataGridTextColumn Binding="{Binding Path=m_Area,Mode=TwoWay}" Header="面积" Width="*"/>
+                                    <DataGridTextColumn Binding="{Binding Path=m_Row,Mode=TwoWay}" Header="Row" Width="*"/>
+                                    <DataGridTextColumn Binding="{Binding Path=m_Column,Mode=TwoWay}" Header="Colum" Width="*"/>
+                                </DataGrid.Columns>
+                            </stylefrm:LayDatagrid>
+                        </Border>
+                    </Grid>
+                </Grid>
+                <!--结尾-->
+                <servier:ModuleFrmBase Grid.Row="2"/>
+            </Grid>
+        </Border>
+    </Border>
+</servier:PluginFrmBase>

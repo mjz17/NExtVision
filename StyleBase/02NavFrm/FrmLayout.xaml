@@ -1,0 +1,408 @@
+﻿<Window x:Class="StyleBase.FrmLayout"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StyleBase"
+        mc:Ignorable="d"
+        WindowStyle="None"      
+        WindowStartupLocation="CenterScreen"
+        Background="{x:Null}"
+        AllowsTransparency="True"
+        Title="FrmCamera" Height="648" Width="1152" Name="LayFrm">
+    <Window.Resources>
+        <ResourceDictionary Source="pack://application:,,,/StyleBase;component/FrmStyle.xaml"/>
+    </Window.Resources>
+    <Border Background="White">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32"/>
+                <RowDefinition/>
+                <RowDefinition Height="54"/>
+            </Grid.RowDefinitions>
+            <!--表头-->
+            <local:FrmHeaderTitle Grid.Row="0" HeadName="画布设置" MinVis="Hidden"/>
+            <!--内容-->
+            <Border Grid.Row="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <!--1画布-->
+                        <Border Grid.Column="0" Margin="8">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+                                <Border Background="Gray" Margin="2">
+                                    <Label Content="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                                </Border>
+                                <RadioButton 
+                                        Grid.Row="1" 
+                                        Content="1画布" 
+                                        Foreground="Black" 
+                                        Name="check_first"
+                                        VerticalAlignment="Center" 
+                                        HorizontalAlignment="Center"
+                                        IsChecked="{Binding Canvas_First,Mode=TwoWay}"
+                                        Command="{Binding checkCommand}"          
+                                        CommandParameter="{Binding ElementName=check_first}"/>
+                            </Grid>
+                        </Border >
+                        <!--2画布-->
+                        <Border Grid.Column="1" Margin="8">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Background="Gray" Margin="2" Grid.Column="0">
+                                        <Label Content="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                                    </Border>
+                                    <Border Background="Gray" Margin="2" Grid.Column="1">
+                                        <Label Content="2" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                                    </Border>
+                                </Grid>
+                                <RadioButton 
+                                        Grid.Row="1" 
+                                        Content="2画布" 
+                                        Name="check_second"
+                                        Foreground="Black" 
+                                        VerticalAlignment="Center" 
+                                        HorizontalAlignment="Center"
+                                        IsChecked="{Binding Canvas_Second,Mode=TwoWay}"
+                                        Command="{Binding checkCommand}"
+                                        CommandParameter="{Binding ElementName=check_second}"/>
+                            </Grid>
+                        </Border>
+                        <!--3画布-->
+                        <Border Grid.Column="2" Margin="8">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Background="Gray" Margin="2">
+                                        <Label Content="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                                    </Border>
+                                    <Grid Grid.Column="1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Border Background="Gray" Margin="2" Grid.Row="0">
+                                            <Label Content="2" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                                        </Border>
+                                        <Border Background="Gray" Margin="2" Grid.Row="2">
+                                            <Label Content="3" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                                        </Border>
+                                    </Grid>
+                                </Grid>
+                                <RadioButton 
+                                        Grid.Row="1" 
+                                        Content="3画布" 
+                                        Name="check_three"
+                                        Foreground="Black" 
+                                        VerticalAlignment="Center" 
+                                        HorizontalAlignment="Center"
+                                        IsChecked="{Binding Canvas_Three,Mode=TwoWay}"
+                                        Command="{Binding checkCommand}"
+                                        CommandParameter="{Binding ElementName=check_three}"/>
+                            </Grid>
+                        </Border>
+                        <!--4画布-->
+                        <Border Grid.Column="3" Margin="8">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Border Background="Gray" Margin="2" Grid.Row="0">
+                                            <Label Content="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                                        </Border>
+                                        <Border Background="Gray" Margin="2" Grid.Row="1">
+                                            <Label Content="3" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                                        </Border>
+                                    </Grid>
+                                    <Grid Grid.Column="1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Border Background="Gray" Margin="2" Grid.Row="0">
+                                            <Label Content="2" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                                        </Border>
+                                        <Border Background="Gray" Margin="2" Grid.Row="1">
+                                            <Label Content="4" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                                        </Border>
+                                    </Grid>
+                                </Grid>
+                                <RadioButton 
+                                        Grid.Row="1"
+                                        Content="4画布" 
+                                        Name="check_four"
+                                        Foreground="Black" 
+                                        VerticalAlignment="Center" 
+                                        HorizontalAlignment="Center"
+                                        IsChecked="{Binding Canvas_Four,Mode=TwoWay}"
+                                        Command="{Binding checkCommand}"
+                                        CommandParameter="{Binding ElementName=check_four}"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <!--5画布-->
+                        <Border Grid.Column="0" Margin="8">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Background="Gray" Margin="2">
+                                        <Label Content="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                                    </Border>
+                                    <Grid Grid.Column="1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Border Background="Gray" Margin="2" Grid.Row="0">
+                                            <Label Content="2" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                                        </Border>
+                                        <Border Background="Gray" Margin="2" Grid.Row="1">
+                                            <Label Content="4" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                                        </Border>
+                                    </Grid>
+                                    <Grid Grid.Column="2">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Border Background="Gray" Margin="2" Grid.Row="0">
+                                            <Label Content="2" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                                        </Border>
+                                        <Border Background="Gray" Margin="2" Grid.Row="1">
+                                            <Label Content="5" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                                        </Border>
+                                    </Grid>
+                                </Grid>
+                                <RadioButton 
+                                        Grid.Row="1"
+                                        Content="5画布" 
+                                        Name="check_five"
+                                        Foreground="Black" 
+                                        VerticalAlignment="Center" 
+                                        HorizontalAlignment="Center"
+                                        IsChecked="{Binding Canvas_Five,Mode=TwoWay}"
+                                        Command="{Binding checkCommand}"
+                                        CommandParameter="{Binding ElementName=check_five}"/>
+                            </Grid>
+                        </Border>
+                        <!--6画布-->
+                        <Border Grid.Column="1" Margin="8">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Border Background="Gray" Margin="2" Grid.Row="0">
+                                            <Label Content="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                                        </Border>
+                                        <Border Background="Gray" Margin="2" Grid.Row="1">
+                                            <Label Content="4" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                                        </Border>
+                                    </Grid>
+                                    <Grid Grid.Column="1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Border Background="Gray" Margin="2" Grid.Row="0">
+                                            <Label Content="2" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                                        </Border>
+                                        <Border Background="Gray" Margin="2" Grid.Row="1">
+                                            <Label Content="5" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                                        </Border>
+                                    </Grid>
+                                    <Grid Grid.Column="2">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Border Background="Gray" Margin="2" Grid.Row="0">
+                                            <Label Content="3" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                                        </Border>
+                                        <Border Background="Gray" Margin="2" Grid.Row="1">
+                                            <Label Content="6" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                                        </Border>
+                                    </Grid>
+                                </Grid>
+                                <RadioButton 
+                                        Grid.Row="1"
+                                        Content="6画布" 
+                                        Name="check_Six"
+                                        Foreground="Black" 
+                                        VerticalAlignment="Center" 
+                                        HorizontalAlignment="Center"
+                                        IsChecked="{Binding Canvas_Six,Mode=TwoWay}"
+                                        Command="{Binding checkCommand}"
+                                        CommandParameter="{Binding ElementName=check_Six}"/>
+                            </Grid>
+                        </Border>
+                        <!--8画布-->
+                        <Border Grid.Column="2" Margin="8">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Border Background="Gray" Margin="2" Grid.Row="0">
+                                            <Label Content="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                                        </Border>
+                                        <Border Background="Gray" Margin="2" Grid.Row="1">
+                                            <Label Content="5" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                                        </Border>
+                                    </Grid>
+                                    <Grid Grid.Column="1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Border Background="Gray" Margin="2" Grid.Row="0">
+                                            <Label Content="2" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                                        </Border>
+                                        <Border Background="Gray" Margin="2" Grid.Row="1">
+                                            <Label Content="6" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                                        </Border>
+                                    </Grid>
+                                    <Grid Grid.Column="2">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Border Background="Gray" Margin="2" Grid.Row="0">
+                                            <Label Content="3" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                                        </Border>
+                                        <Border Background="Gray" Margin="2" Grid.Row="1">
+                                            <Label Content="7" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                                        </Border>
+                                    </Grid>
+                                    <Grid Grid.Column="3">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Border Background="Gray" Margin="2" Grid.Row="0">
+                                            <Label Content="4" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                                        </Border>
+                                        <Border Background="Gray" Margin="2" Grid.Row="1">
+                                            <Label Content="8" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                                        </Border>
+                                    </Grid>
+                                </Grid>
+                                <RadioButton 
+                                        Grid.Row="1"
+                                        Content="8画布" 
+                                        Name="check_Eight"
+                                        Foreground="Black" 
+                                        VerticalAlignment="Center" 
+                                        HorizontalAlignment="Center"
+                                        IsChecked="{Binding Canvas_Eight,Mode=TwoWay}"
+                                        Command="{Binding checkCommand}"
+                                        CommandParameter="{Binding ElementName=check_Eight}"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </Border>
+            <!--设定按钮-->
+            <Border Grid.Row="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <local:SuperButton
+                        Background="Transparent"
+                        Grid.Column="0"
+                        Command="{Binding confirmCommand}"
+                        CommandParameter="{Binding ElementName=LayFrm}"
+                        Width="80" Height="32"  
+                        Content="确定"
+                        Foreground="White" />
+                    <local:SuperButton
+                        Background="Transparent"
+                        Grid.Column="1"
+                        Command="{Binding cancelCommand}"
+                        CommandParameter="{Binding ElementName=LayFrm}"
+                        Width="80" Height="32"  
+                        Content="取消"
+                        Foreground="White" />
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

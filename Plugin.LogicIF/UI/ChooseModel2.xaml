@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="Plugin.LogicIF.ChooseModel2"
+             xmlns:stylefrm="clr-namespace:StyleBase;assembly=StyleBase" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Plugin.LogicIF"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="pack://application:,,,/StyleBase;component/FrmStyle.xaml"/>
+    </UserControl.Resources>
+
+    <StackPanel>
+        <stylefrm:UcLinkDataVar 
+            Height="34" 
+            Width="240"
+            CustName="链接数据1：" 
+            DataType="Bool"
+            DispVar="{Binding LinkDataName1,Mode=TwoWay}" 
+            ModuleID="{Binding CurrentModelID,Mode=TwoWay}"                                         
+            LinkValue="Gen_InputDataName1_EValueAlarm"/>
+        <stylefrm:UcLinkDataVar 
+            Height="34"
+            Width="240"
+            CustName="链接数据2：" 
+            DataType="Bool"
+            DispVar="{Binding LinkDataName2,Mode=TwoWay}" 
+            ModuleID="{Binding CurrentModelID,Mode=TwoWay}"                                         
+            LinkValue="Gen_InputDataName2_EValueAlarm"/>
+    </StackPanel>
+</UserControl>

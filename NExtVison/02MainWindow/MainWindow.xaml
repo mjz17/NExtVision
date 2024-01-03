@@ -1,0 +1,229 @@
+﻿<Window x:Class="NExtVison.MainWindow"
+        xmlns:Avalon="http://schemas.xceed.com/wpf/xaml/avalondock" 
+        xmlns:StyleFrm="clr-namespace:StyleBase;assembly=StyleBase"
+        xmlns:bev="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NExtVison"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        Title="MainWindow" 
+        WindowStartupLocation="CenterScreen"
+        Style="{DynamicResource WindowStyle}"
+        MinWidth="384" MinHeight="216"
+        Background="#1E1E1E">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/StyleBase;component/FrmStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="Border" x:Key="borderStyle">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush EndPoint="1.002,0.498" StartPoint="-0.024,0.502">
+                            <GradientStop Color="#00796B" Offset="0.0"/>
+                            <GradientStop Color="#066A5F" Offset="0.25"/>
+                            <GradientStop Color="#09655B" Offset="0.5"/>
+                            <GradientStop Color="#0C5D54" Offset="0.75"/>
+                            <GradientStop Color="#124F48" Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="TextBolckStyle" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Foreground" Value="White"/>
+            </Style>
+            <Style x:Key="ButtonStyle" TargetType="Button">
+                <Setter Property="Width" Value="50"/>
+                <Setter Property="Height" Value="28"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="FontFamily" Value="{StaticResource iconfont}"/>
+
+                <Setter Property="Template" >
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}">
+                                <ContentPresenter Content="{TemplateBinding Content}"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#22FFFFFF"/>
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter Property="Background" Value="#44FFFFFF"/>
+                    </Trigger>
+                </Style.Triggers>
+
+            </Style>
+            <Style x:Key="WindowStyle" TargetType="Window">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Window">
+                            <Border Background="{TemplateBinding Background}">
+                                <Grid Name="win_content">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="32"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+
+                                    <Border Style="{StaticResource borderStyle}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" WindowChrome.IsHitTestVisibleInChrome="True">
+                                                <Button Content="文件" Style="{StaticResource ButtonStyle}" Margin="2 0 0 0"/>
+                                                <Button Content="视图" Style="{StaticResource ButtonStyle}"/>
+                                                <Button Content="设置" Style="{StaticResource ButtonStyle}"/>
+                                                <TextBlock Text="NExtVison V0.0.0.1" 
+                                                           Style="{StaticResource TextBolckStyle}" 
+                                                           HorizontalAlignment="Left" Margin="10 0 0 0"/>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="2" Orientation="Horizontal" 
+                                                        HorizontalAlignment="Right" 
+                                                        VerticalAlignment="Center" 
+                                                        WindowChrome.IsHitTestVisibleInChrome="True">
+                                                <Button Content="&#xe729;" 
+                                                        Style="{StaticResource ButtonStyle}"
+                                                        Command="{Binding MinmizeCommand}"
+                                                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+
+                                                <Button Content="&#xe699;" 
+                                                        Style="{StaticResource ButtonStyle}" 
+                                                        Command="{Binding MaxmizeCommand}"
+                                                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+
+                                                <Button Content="&#xe60b;" 
+                                                        Margin="0 0 2 0"
+                                                        Style="{StaticResource ButtonStyle}"
+                                                        Command="{Binding CloseCommand}"
+                                                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+
+                                    <ContentPresenter Grid.Row="1" Content="{TemplateBinding Content}"/>
+
+                                </Grid>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="WindowState" Value="Maximized">
+                                    <Setter Property="Margin" TargetName="win_content" Value="8"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="40" CornerRadius="0" GlassFrameThickness="0"/>
+    </WindowChrome.WindowChrome>
+
+    <Border>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="48"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="24"/>
+            </Grid.RowDefinitions>
+            <!--导航-->
+            <StyleFrm:NavFrm Grid.Row="0"/>
+
+            <!--<WindowsFormsHost/>-->
+
+            <Avalon:DockingManager 
+                x:Name="dockingManager" 
+                Grid.Row="1" 
+                Background="#35383A" 
+                AllowMixedOrientation="True">
+
+                <Avalon:DockingManager.Theme>
+                    <Avalon:MetroTheme/>
+                </Avalon:DockingManager.Theme>
+
+                <!--表头的样式-->
+                <Avalon:DockingManager.AnchorableTitleTemplate>
+                    <DataTemplate>
+                        <Border Background="#212121">
+                            <Label  Content="{Binding Title}" Foreground="White" VerticalAlignment="Center" FontSize="13" Height="24"/>
+                        </Border>
+                    </DataTemplate>
+                </Avalon:DockingManager.AnchorableTitleTemplate>
+
+                <Avalon:LayoutRoot>
+                    <Avalon:LayoutPanel>
+                        <!--工具栏-->
+                        <Avalon:LayoutPanel Orientation="Horizontal">
+
+                            <Avalon:LayoutAnchorablePane x:Name="LayAnch1">
+                                <Avalon:LayoutAnchorable Title="工具栏" ContentId="1"  CanClose="False" CanHide="False" CanAutoHide="False">
+                                    <!--工具栏-->
+                                    <StyleFrm:Toolbar/>
+                                </Avalon:LayoutAnchorable>
+                            </Avalon:LayoutAnchorablePane>
+
+                            <Avalon:LayoutPanel>
+                                <!--流程栏-->
+                                <Avalon:LayoutAnchorablePane x:Name="LayAnch2">
+                                    <Avalon:LayoutAnchorable Title="流程栏" ContentId="2"   CanClose="False" CanHide="False" CanAutoHide="False">
+                                        <!--流程栏-->
+                                        <StyleFrm:Processbar/>
+                                    </Avalon:LayoutAnchorable>
+                                </Avalon:LayoutAnchorablePane>
+                            </Avalon:LayoutPanel>
+
+                        </Avalon:LayoutPanel>
+
+                        <Avalon:LayoutPanel Orientation="Vertical">
+                            <!--图像显示-->
+                            <Avalon:LayoutAnchorablePane>
+                                <Avalon:LayoutAnchorable Title="图像显示" ContentId="123"  CanClose="False" CanHide="False" CanAutoHide="False">
+                                    <Grid Name="Border_Hwindow"/>
+                                </Avalon:LayoutAnchorable>
+                            </Avalon:LayoutAnchorablePane>
+
+                            <Avalon:LayoutPanel Orientation="Horizontal" x:Name="LayAnch3">
+                                <!--LOG日志-->
+                                <Avalon:LayoutAnchorablePane>
+                                    <Avalon:LayoutAnchorable Title="LOG日志" ContentId="123"  CanClose="False" CanHide="False" CanAutoHide="False">
+                                        <StyleFrm:LogTool/>
+                                    </Avalon:LayoutAnchorable>
+                                </Avalon:LayoutAnchorablePane>
+                                <!--设备状态-->
+                                <Avalon:LayoutAnchorablePane>
+                                    <Avalon:LayoutAnchorable Title="设备状态" ContentId="123"  CanClose="False" CanHide="False" CanAutoHide="False">
+                                        <StyleFrm:DeviceConnect/>
+                                    </Avalon:LayoutAnchorable>
+                                </Avalon:LayoutAnchorablePane>
+                            </Avalon:LayoutPanel>
+                        </Avalon:LayoutPanel>
+
+                    </Avalon:LayoutPanel>
+                </Avalon:LayoutRoot>
+
+            </Avalon:DockingManager>
+
+            <!--页脚-->
+            <StyleFrm:FooterFrm Grid.Row="2"/>
+        </Grid>
+    </Border>
+
+</Window>

@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="StyleBase.CommunCom"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:StyleBase"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary Source="pack://application:,,,/StyleBase;component/FrmStyle.xaml"/>
+    </UserControl.Resources>
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="36"/>
+            <RowDefinition Height="36"/>
+            <RowDefinition Height="36"/>
+            <RowDefinition Height="36"/>
+            <RowDefinition Height="36"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Label Content="串口号：" FontSize="13" VerticalAlignment="Center"/>
+            <ComboBox Name="cmb_PortName" Height="32" Width="120" VerticalContentAlignment="Center" BorderBrush="#11554F" DropDownClosed="cmb_PortName_DropDownClosed"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Label Content="波特率：" FontSize="13" VerticalAlignment="Center"/>
+            <ComboBox Name="cmb_BaudRate" Height="32" Width="120" VerticalContentAlignment="Center" BorderBrush="#11554F" DropDownClosed="cmb_BaudRate_DropDownClosed"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Label Content="效验位：" FontSize="13" VerticalAlignment="Center"/>
+            <ComboBox Name="cmb_Parity" Height="32" Width="120" VerticalContentAlignment="Center" BorderBrush="#11554F" DropDownClosed="cmb_Parity_DropDownClosed"/>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Orientation="Horizontal">
+            <Label Content="数据位：" FontSize="13" VerticalAlignment="Center"/>
+            <ComboBox Name="cmb_DataBits" Height="32" Width="120" VerticalContentAlignment="Center" BorderBrush="#11554F" DropDownClosed="cmb_DataBits_DropDownClosed"/>
+        </StackPanel>
+        <StackPanel Grid.Row="4" Orientation="Horizontal">
+            <Label Content="停止位：" FontSize="13" VerticalAlignment="Center"/>
+            <ComboBox Name="cmb_StopBits" Height="32" Width="120" VerticalContentAlignment="Center" BorderBrush="#11554F" DropDownClosed="cmb_StopBits_DropDownClosed"/>
+            <Label Grid.Column="1" VerticalAlignment="Center" FontSize="13" Content="备注："/>
+            <TextBox Name="txt_reMarks" Height="32" Width="120" VerticalContentAlignment="Center" TextChanged="txt_reMarks_TextChanged"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

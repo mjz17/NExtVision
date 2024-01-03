@@ -1,0 +1,194 @@
+﻿<UserControl x:Class="Plugin.BlobAnalysis.ImageSelect_shape"
+             xmlns:stylefrm="clr-namespace:StyleBase;assembly=StyleBase"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Plugin.BlobAnalysis"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/StyleBase;component/FrmStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+
+        <!--菜单外部样式-->
+        <Style TargetType="{x:Type ContextMenu}" x:Key="ContextAddPro">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate  TargetType="ContextMenu">
+                        <!--背景色-->
+                        <Border Name="bd" Background="#222021" BorderThickness="1" BorderBrush="Gray" Width="160">
+                            <ItemsPresenter/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--中间横线-->
+        <Style x:Key="SeperatorTemplate" TargetType="Separator">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate  TargetType="Separator">
+                        <Border BorderBrush="White" BorderThickness="0 0 0 1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--内部项-->
+        <Style x:Key="MenuItemTemplate" TargetType="MenuItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate  TargetType="MenuItem">
+                        <Border Name="Bt" Height="32" Background="Transparent">
+                            <Border Name="bd"  Height="32" Background="Transparent">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock 
+                                            Grid.Column="0"
+                                            x:Name="tb"
+                                            Margin="10,0,10,0" 
+                                            Foreground="White"
+                                            FontSize="13" 
+                                            VerticalAlignment="Center" 
+                                            Text="{Binding Header, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                    <Path  
+                                            Grid.Column="1"
+                                            Visibility="Collapsed" 
+                                            x:Name="_path" 
+                                            HorizontalAlignment="Center"  
+                                            Margin="0 15 0 0"   
+                                            Data="M0,6 6,0 0,-6 z" 
+                                            Fill="Gray"/>
+                                    <Popup  
+                                            Placement="Right" 
+                                            x:Name="SubMenuPopup"
+                                            AllowsTransparency="True"   
+                                            Focusable="False" 
+                                            IsOpen="{TemplateBinding IsSubmenuOpen}">
+                                        <ScrollViewer   
+                                                ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                                                ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                            <Border Background="#222021" 
+                                                        Name="SubmenuBorder" 
+                                                        SnapsToDevicePixels="True" Width="160">
+                                                <StackPanel  
+                                                        IsItemsHost="True"   
+                                                        KeyboardNavigation.DirectionalNavigation="Cycle" />
+                                            </Border>
+                                        </ScrollViewer>
+                                    </Popup>
+                                </Grid>
+                            </Border>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bt" Property="Background" Value="gray" />
+                                <Setter TargetName="_path" Property="Fill" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="HasItems" Value="true">
+                                <Setter TargetName="_path" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--内部项-->
+        <Style x:Key="MenuItemTemplate1" TargetType="MenuItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate  TargetType="MenuItem">
+                        <Border Name="Bt" Height="18" Background="Transparent">
+                            <Border Name="bd"  Height="18" Background="Transparent">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image x:Name="img" Stretch="None" Margin="10,0,10,0" Source="{Binding Icon, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                    <TextBlock x:Name="tb" Margin="0,0,10,0" Foreground="White" FontSize="13" VerticalAlignment="Center" Text="{Binding Header, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                </StackPanel>
+                            </Border>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="32"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Height="32" Visibility="{Binding m_Control,Mode=TwoWay}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="120"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="使用索引：" VerticalAlignment="Center" Grid.Column ="0" Margin="3 0 3 0"/>
+            <ComboBox Grid.Column="1" Height="28" Width="100" Name="Cmb_SelectIndex"/>
+        </Grid>
+        <Grid Grid.Row="1" Height="32">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="120"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal"  Grid.Column="0">
+
+                <Button Height="30" Width="30" 
+                        Content="&#xe614;" Foreground="#1296db" FontSize="22"
+                        Style="{StaticResource Nav_Btn}" 
+                        Background="Transparent">
+                    <Button.ContextMenu>
+                        <ContextMenu Style="{StaticResource ContextAddPro}">
+                            <MenuItem Style="{StaticResource MenuItemTemplate1}"/>
+                            <MenuItem Header="属性" Style="{StaticResource MenuItemTemplate}">
+                                <MenuItem Header="面积" Tag="0" Style="{StaticResource MenuItemTemplate}" Click="MenuItem_Click"/>
+                            </MenuItem>
+                            <MenuItem Style="{StaticResource MenuItemTemplate1}"/>
+                        </ContextMenu>
+                    </Button.ContextMenu>
+                </Button>
+                
+                <Button Grid.Column="1" Height="30" Width="30" 
+                    Content="&#xe608;" Foreground="#1296db" FontSize="22"
+                    Style="{StaticResource Nav_Btn}" 
+                    Background="Transparent" Click="Button_Click"/>
+                <Label Grid.Column="2" Content="条件关系：" FontSize="13" VerticalContentAlignment="Center"/>
+            </StackPanel>
+            <ComboBox Grid.Column="1" Height="28" Width="100" Name="cmb_shapeModel"/>
+        </Grid>
+        <Border Grid.Row="2">
+            <stylefrm:LayDatagrid
+                Background="White"
+                x:Name="dgv_Shape" 
+                AutoGenerateColumns="False"                                         
+                CanUserAddRows="False" 
+                CanUserSortColumns="False"
+                SelectionMode="Single" 
+                FontSize="13" 
+                IsReadOnly="False"      
+                GridLinesVisibility="None"              
+                ColumnHeaderHeight="32"
+                RowHeight="32"
+                CellStyle="{StaticResource DatagridStyle}"
+                RowStyle="{StaticResource DatagridRowStyle}"
+                ColumnHeaderStyle="{StaticResource DatagridHead}">
+                <DataGrid.Columns >
+                    <DataGridTextColumn Binding="{Binding Path=m_shapeType,Mode=TwoWay}" Header="特征" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding Path=m_min,Mode=TwoWay}" Header="最小" Width="*" IsReadOnly="False"/>
+                    <DataGridTextColumn Binding="{Binding Path=m_max,Mode=TwoWay}" Header="最大" Width="*" IsReadOnly="False"/>
+                </DataGrid.Columns>
+            </stylefrm:LayDatagrid>
+        </Border>
+    </Grid>
+</UserControl>

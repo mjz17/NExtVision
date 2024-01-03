@@ -1,0 +1,154 @@
+﻿<UserControl x:Class="StyleBase.NavFrm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:StyleBase"
+             mc:Ignorable="d" 
+             x:Name="NvaFrm"
+             d:DesignHeight="48">
+    <UserControl.Resources>
+        <ResourceDictionary Source="pack://application:,,,/StyleBase;component/FrmStyle.xaml"/>
+    </UserControl.Resources>
+    <Grid>
+        <StackPanel Orientation="Horizontal">
+            <!--解决方案列表-->
+            <Button Content="&#xe60f;" 
+                    Style="{StaticResource Nav_Btn}" 
+                    Command="{Binding FrmSolution}"
+                    IsEnabled="{Binding ControlIsEnabled,Mode=TwoWay}">
+                <Button.ToolTip>
+                    <Label>解决方案列表</Label>
+                </Button.ToolTip>
+            </Button>
+            <!--设置-->
+            <Button Content="&#xe639;" 
+                    Style="{StaticResource Nav_Btn}" 
+                    Command="{Binding SetFrmCom}" 
+                    IsEnabled="{Binding ControlIsEnabled,Mode=TwoWay}">
+                <Button.ToolTip>
+                    <Label>设置</Label>
+                </Button.ToolTip>
+            </Button>
+            <!--新建项目-->
+            <Button Content="&#xe6de;" 
+                    Style="{StaticResource Nav_Btn}"
+                    Command="{Binding CreateProjectCom}" 
+                    IsEnabled="{Binding ControlIsEnabled,Mode=TwoWay}">
+                <Button.ToolTip>
+                    <Label>新建项目</Label>
+                </Button.ToolTip>
+            </Button>
+            <!--打开项目-->
+            <Button Content="&#xe60a;" 
+                    Style="{StaticResource Nav_Btn}" 
+                    Command="{Binding ReadProject}" 
+                    IsEnabled="{Binding ControlIsEnabled,Mode=TwoWay}">
+                <Button.ToolTip>
+                    <Label>打开项目</Label>
+                </Button.ToolTip>
+            </Button>
+            <!--保存项目-->
+            <Button 
+                Name="btn_Save"
+                Content="&#xe66c;" 
+                    Style="{StaticResource Nav_Btn}" 
+                    Command="{Binding SaveProject}" 
+                    IsEnabled="{Binding ControlIsEnabled,Mode=TwoWay}">
+                <Button.ToolTip>
+                    <Label>保存项目</Label>
+                </Button.ToolTip>
+            </Button>
+            <!--另存项目-->
+            <Button Content="&#xe600;" 
+                    Style="{StaticResource Nav_Btn}" 
+                    Command="{Binding SaveAsProject}" 
+                    IsEnabled="{Binding ControlIsEnabled,Mode=TwoWay}">
+                <Button.ToolTip>
+                    <Label>另存项目</Label>
+                </Button.ToolTip>
+            </Button>
+            <!--权限保护-->
+            <Button Content="&#xe64d;" 
+                    Style="{StaticResource Nav_Btn}"
+                    Command="{Binding PermProject}" 
+                    IsEnabled="{Binding ControlIsEnabled,Mode=TwoWay}">
+                <Button.ToolTip>
+                    <Label>权限保护</Label>
+                </Button.ToolTip>
+            </Button>
+            <!--急速模式-->
+            <Button Content="&#xe612;" 
+                    Foreground="{Binding RunModelBackGround,Mode=TwoWay}"
+                    Style="{StaticResource Nav_Btn}"
+                    Command="{Binding QuickProject}">
+                <Button.ToolTip>
+                    <Label>急速模式</Label>
+                </Button.ToolTip>
+            </Button>
+            <!--运行一次-->
+            <Button Content="&#xe6df;" 
+                    Style="{StaticResource Nav_Main_Btn}"
+                    Command="{Binding RunOnceCom}"
+                    IsEnabled="{Binding ControlIsEnabled,Mode=TwoWay}">
+                <Button.ToolTip>
+                    <Label>运行一次</Label>
+                </Button.ToolTip>
+            </Button>
+            <!--循环运行启动-->
+            <Button Content="&#xe637;" 
+                    Style="{StaticResource Nav_Main_Btn}" 
+                    Command="{Binding RunStartCycleCom}" 
+                    IsEnabled="{Binding ControlIsEnabled,Mode=TwoWay}">
+                <Button.ToolTip>
+                    <Label>循环启动</Label>
+                </Button.ToolTip>
+            </Button>
+            <!--循环运行停止-->
+            <Button Content="&#xe799;" 
+                    Style="{StaticResource Nav_Main_Btn}" 
+                    Command="{Binding RunStopCycleCom}" 
+                    IsEnabled="{Binding StopControIsEnabled,Mode=TwoWay}">
+                <Button.ToolTip>
+                    <Label>循环停止</Label>
+                </Button.ToolTip>
+            </Button>
+            <!--相机列表-->
+            <Button Content="&#xe6fb;" 
+                    Style="{StaticResource Nav_Btn}" 
+                    Command="{Binding CmeraCom}"
+                    IsEnabled="{Binding ControlIsEnabled,Mode=TwoWay}">
+                <Button.ToolTip>
+                    <Label>相机列表</Label>
+                </Button.ToolTip>
+            </Button>
+            <!--变量系统-->
+            <Button Content="&#xe7dd;" 
+                    Style="{StaticResource Nav_Btn}"
+                    Command="{Binding VarSetCom}" 
+                    IsEnabled="{Binding ControlIsEnabled,Mode=TwoWay}">
+                <Button.ToolTip>
+                    <Label>变量系统</Label>
+                </Button.ToolTip>
+            </Button>
+            <!--窗体布局-->
+            <Button Content="&#xed9a;"
+                    Style="{StaticResource Nav_Btn}"
+                    Command="{Binding ShowLayoutFrm}" 
+                    IsEnabled="{Binding ControlIsEnabled,Mode=TwoWay}">
+                <Button.ToolTip>
+                    <Label>窗体布局</Label>
+                </Button.ToolTip>
+            </Button>
+            <!--通讯配置-->
+            <Button Content="&#xe62c;" 
+                    Style="{StaticResource Nav_Btn}"
+                    Command="{Binding CommunaCation}" 
+                    IsEnabled="{Binding ControlIsEnabled,Mode=TwoWay}">
+                <Button.ToolTip>
+                    <Label>通讯配置</Label>
+                </Button.ToolTip>
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

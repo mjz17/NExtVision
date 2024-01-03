@@ -1,0 +1,54 @@
+﻿<servier:PluginFrmBase 
+             x:Class="Plugin.LogicIF.ModuleFrm"
+             xmlns:stylefrm="clr-namespace:StyleBase;assembly=StyleBase"
+             xmlns:servier="clr-namespace:VisionCore;assembly=VisionCore"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Plugin.LogicIF"
+             mc:Ignorable="d" 
+             WindowStyle="None"
+             ResizeMode="NoResize"
+             WindowStartupLocation="CenterScreen"
+             Height="270" Width="480">
+
+    <servier:PluginFrmBase.Resources>
+        <ResourceDictionary Source="pack://application:,,,/StyleBase;component/FrmStyle.xaml"/>
+    </servier:PluginFrmBase.Resources>
+
+    <Border Style="{StaticResource borderStyle}">
+        <Border BorderThickness="2 0 2 2">
+            <Grid Background="White">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="32"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="54"/>
+                </Grid.RowDefinitions>
+                <!--表头-->
+                <stylefrm:TitleFrm Grid.Row="0" Name="Title" HeadName="如果" MinVis="Collapsed" MaxVis="Collapsed" CloseWindow="Title_CloseWindow"/>
+                <!--内容-->
+                <Border Grid.Row="1" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <RadioButton Content="True" FontSize="13" Margin="0 0 20 0" Name="Logic_True" Click="Logic_Click"/>
+                            <RadioButton Content="False" FontSize="13" Margin="0 0 20 0" Name="Logic_False" Click="Logic_Click"/>
+                            <RadioButton Content="上升沿" FontSize="13" Margin="0 0 20 0" Name="Logic_And" Click="Logic_Click"/>
+                            <RadioButton Content="下降沿" FontSize="13" Margin="0 0 20 0" Name="Logic_Or" Click="Logic_Click"/>
+                        </StackPanel>
+
+                        <ContentControl Grid.Row="1" x:Name="Page_Change"/>
+
+                    </Grid>
+                </Border>
+                <!--结尾-->
+                <servier:ModuleFrmBase Grid.Row="2"/>
+            </Grid>
+        </Border>
+    </Border>
+</servier:PluginFrmBase>

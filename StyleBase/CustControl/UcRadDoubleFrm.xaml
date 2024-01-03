@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="StyleBase.UcRadDoubleFrm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:StyleBase"
+             mc:Ignorable="d">
+    <Border BorderThickness="1">
+        <!--内容-->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <RadioButton 
+                     FontSize="13" 
+                     VerticalContentAlignment="Center" 
+                     HorizontalAlignment="Center" 
+                     Grid.Column="0"
+                     IsChecked="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=LeftCheck,Mode=TwoWay}"
+                     Content="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=Leftside,Mode=TwoWay}"
+                     Checked="RadioButton_Checked"
+                     />
+            <RadioButton 
+                     FontSize="13" 
+                     VerticalContentAlignment="Center" 
+                     HorizontalAlignment="Center" 
+                     Grid.Column="1"
+                     IsChecked="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=RightCheck,Mode=TwoWay}"
+                     Content="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=Rightside,Mode=TwoWay}"
+                     Checked="RadioButton_Checked" 
+                     />
+        </Grid>
+    </Border>
+</UserControl>

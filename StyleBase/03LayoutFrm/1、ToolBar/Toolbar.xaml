@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="StyleBase.Toolbar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:StyleBase"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary Source="pack://application:,,,/StyleBase;component/FrmStyle.xaml"/>
+    </UserControl.Resources>
+
+    <Border Background="#222021">
+        <!--项目树-->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!--流程栏-->
+            <Grid Grid.Row="0">
+                <local:AddProject/>
+            </Grid>
+            <!--工作栏-->
+            <ScrollViewer VerticalScrollBarVisibility="Hidden"  Grid.Row="1" >
+                <local:ModuleProject/>
+            </ScrollViewer>
+        </Grid>
+    </Border>
+</UserControl>

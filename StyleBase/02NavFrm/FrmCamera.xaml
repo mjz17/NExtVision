@@ -1,0 +1,257 @@
+﻿<Window x:Class="StyleBase.FrmCamera"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:halconTool="clr-namespace:HalconControl;assembly=HWindow_Tool"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StyleBase"
+        xmlns:bev="http://schemas.microsoft.com/xaml/behaviors"
+        mc:Ignorable="d" 
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Height="594" Width="1056">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/StyleBase;component/FrmStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <!--菜单外部样式-->
+            <Style TargetType="{x:Type ContextMenu}" x:Key="ContextAddPro">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate  TargetType="ContextMenu">
+                            <!--背景色-->
+                            <Border Name="bd" Background="#222021" BorderThickness="1" BorderBrush="Gray" Width="160">
+                                <ItemsPresenter/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!--中间横线-->
+            <Style x:Key="SeperatorTemplate" TargetType="Separator">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate  TargetType="Separator">
+                            <Border BorderBrush="White" BorderThickness="0 0 0 1"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!--内部项-->
+            <Style x:Key="MenuItemTemplate" TargetType="MenuItem">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate  TargetType="MenuItem">
+                            <Border Name="Bt" Height="32" Background="Transparent">
+                                <Border Name="bd"  Height="32" Background="Transparent">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image x:Name="img" Stretch="None" Margin="10,0,10,0" Source="{Binding Icon, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                        <TextBlock x:Name="tb" Margin="0,0,10,0" Foreground="White" FontSize="13" VerticalAlignment="Center" Text="{Binding Header, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                    </StackPanel>
+                                </Border>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Bt" Property="Background" Value="gray" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!--内部项-->
+            <Style x:Key="MenuItemTemplate1" TargetType="MenuItem">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate  TargetType="MenuItem">
+                            <Border Name="Bt" Height="18" Background="Transparent">
+                                <Border Name="bd"  Height="18" Background="Transparent">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image x:Name="img" Stretch="None" Margin="10,0,10,0" Source="{Binding Icon, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                        <TextBlock x:Name="tb" Margin="0,0,10,0" Foreground="White" FontSize="13" VerticalAlignment="Center" Text="{Binding Header, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                    </StackPanel>
+                                </Border>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Border Style="{StaticResource borderStyle}">
+        <Border BorderThickness="2 0 2 2">
+            <Grid Background="White">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="32"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="54"/>
+                </Grid.RowDefinitions>
+                <!--表头-->
+                <local:FrmHeaderTitle Grid.Row="0" HeadName="相机列表" MinVis="Hidden" CloseWindow="TitleFrm_CloseWindow"/>
+                <!--内容-->
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.382*"/>
+                        <ColumnDefinition Width="0.618*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Column="0" Margin="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="32"/>
+                                <RowDefinition Height="32"/>
+                                <RowDefinition Height="32"/>
+                                <RowDefinition Height="32"/>
+                                <RowDefinition />
+                                <RowDefinition Height="32"/>
+                                <RowDefinition Height="32"/>
+                                <RowDefinition Height="44"/>
+                            </Grid.RowDefinitions>
+                            <Border Style="{StaticResource borderStyle}" VerticalAlignment="Top" Grid.Row="0" Height="32">
+                                <TextBlock Text="设备选择" Foreground="White" VerticalAlignment="Center" Margin="5" HorizontalAlignment="Left" FontSize="13"/>
+                            </Border>
+                            <Border Grid.Row="1">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0"  Content="设备型号：" VerticalContentAlignment="Center" FontSize="13"/>
+                                    <ComboBox Height="30" Width="220" Grid.Column="1" Name="Cmb_CameraType" DropDownClosed="Cmb_CameraType_DropDownClosed"/>
+                                </Grid>
+                            </Border>
+                            <Border Grid.Row="2">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0"  Content="设备列表：" VerticalContentAlignment="Center" FontSize="13"/>
+                                    <ComboBox Height="30" Width="220" Grid.Column="1" Name="Cmb_CameraLst"/>
+                                    <local:SuperButton 
+                                        Grid.Column="2" Height="30" Width="68" 
+                                        Content="添加" FontSize="13" Foreground="White"
+                                        x:Name="btn_Add"
+                                        Click="btn_Add_Click"/>
+                                </Grid>
+                            </Border>
+                            <Border Style="{StaticResource borderStyle}" VerticalAlignment="Top" Grid.Row="3" Height="32">
+                                <TextBlock Text="设备列表" Foreground="White" VerticalAlignment="Center" Margin="5" HorizontalAlignment="Left" FontSize="13"/>
+                            </Border>
+                            <!--列表-->
+                            <Border Grid.Row="4">
+                                <local:LayDatagrid 
+                                    Background="White"
+                                    x:Name="dgv_Camera" 
+                                    AutoGenerateColumns="False"                       
+                                    Margin="2"                    
+                                    CanUserAddRows="False" 
+                                    CanUserSortColumns="False"
+                                    SelectionMode="Single" 
+                                    FontSize="13" 
+                                    IsReadOnly="True"
+                                    ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                    ScrollViewer.VerticalScrollBarVisibility="Hidden"        
+                                    GridLinesVisibility="None"              
+                                    ColumnHeaderHeight="32"
+                                    RowHeight="32"
+                                    SelectedCellsChanged="dgv_Camera_SelectedCellsChanged"
+                                    PreviewMouseRightButtonUp="dgv_Camera_PreviewMouseRightButtonUp"
+                                    CellStyle="{StaticResource DatagridStyle}"
+                                    RowStyle="{StaticResource DatagridRowStyle}"
+                                    ColumnHeaderStyle="{StaticResource DatagridHead}">
+                                    <DataGrid.ContextMenu>
+                                        <ContextMenu Style="{StaticResource ContextAddPro}">
+                                            <MenuItem Style="{StaticResource MenuItemTemplate1}"/>
+                                            <MenuItem 
+                                                Header="删除"  
+                                                Style="{StaticResource MenuItemTemplate}"
+                                                Click="btn_Delete_Click"
+                                                Icon="pack://application:,,,/StyleBase;component/03LayoutFrm/ImgConMenu/删除.png"/>
+                                            <Separator Style="{StaticResource SeperatorTemplate}"/>
+                                            <MenuItem 
+                                                Header="删除所有"  
+                                                Style="{StaticResource MenuItemTemplate}"
+                                                Click="btn_DeleteAll_Click"
+                                                Icon="pack://application:,,,/StyleBase;component/03LayoutFrm/ImgConMenu/删除.png"/>
+                                            <MenuItem Style="{StaticResource MenuItemTemplate1}"/>
+                                        </ContextMenu>
+                                    </DataGrid.ContextMenu>
+                                    <DataGrid.Columns >
+                                        <DataGridTextColumn Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow},Path=(local:DataGridHelper.RowIndex)}"  Header="序号" Width="50"/>
+                                        <DataGridTextColumn Binding="{Binding Path=m_DeviceType,Mode=TwoWay}" Header="名称" Width="50"/>
+                                        <DataGridTextColumn Binding="{Binding Path=m_SerialNO,Mode=TwoWay}"  Header="注释" Width="*"/>
+                                        <DataGridTextColumn Binding="{Binding Path=m_bConnected,Mode=TwoWay}" Header="连接状态" Width="80"/>
+                                    </DataGrid.Columns>
+                                </local:LayDatagrid>
+                            </Border>
+                            <Grid Grid.Row="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="1.5*"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="1.5*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Content="当前相机" FontSize="13" VerticalContentAlignment="Center"/>
+                                <TextBox Grid.Column="1"  Height="30" Width="100" Name="txt_CameraName" VerticalContentAlignment="Center"/>
+                                <Label Grid.Column="2" Content="触发模式" FontSize="13" VerticalContentAlignment="Center"/>
+                                <ComboBox  Grid.Column="3" Height="30" Width="100" Name="Cmb_Trigger"/>
+                            </Grid>
+                            <Grid Grid.Row="6">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <local:UcAaSTxt Grid.Column="0" numHeadName="曝光时间" minValue="0" maxValue="1000000" midValue="10" ControlValue="{Binding Exposure,Mode=TwoWay}"/>
+                                <local:UcAaSTxt Grid.Column="1" numHeadName="增益" minValue="0" maxValue="10" midValue="1" ControlValue="{Binding Gain,Mode=TwoWay}"/>
+                            </Grid>
+                            <Grid Grid.Row="7">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <local:SuperButton 
+                                    Grid.Column="0" Height="32" Width="90"
+                                    Content="连接" FontSize="13" Foreground="White"
+                                    x:Name="DevConnect"
+                                    Click="DevConnect_Click"/>
+                                <local:SuperButton 
+                                    Grid.Column="1" Height="32" Width="90"
+                                    Content="断开" FontSize="13" Foreground="White"
+                                    x:Name="DisConnect"
+                                    Click="DisConnect_Click"/>
+                                <local:SuperButton
+                                    Grid.Column="2" Height="32" Width="90"
+                                    Content="采集图像" FontSize="13" Foreground="White"
+                                    x:Name="CaptureImage"
+                                    Click="CaptureImage_Click"/>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                    <!--图像窗体-->
+                    <Border Grid.Column="1" Margin="1">
+                        <WindowsFormsHost  Name="Frm_Hose1" Margin="1">
+                            <halconTool:HWindow_Final x:Name="Main_HalconView"/>
+                        </WindowsFormsHost>
+                    </Border>
+                </Grid>
+                <!--操作栏-->
+                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin=" 0 0 20 0">
+                    <local:SuperButton Height="40" Width="88" Content="确定" FontSize="13" Foreground="White" x:Name="btn_Confirm" Click="btn_Confirm_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Border>
+</Window>

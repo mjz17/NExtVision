@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1D599386-D6A4-4FF8-96B4-A873A41BA73D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CommunaCation</RootNamespace>
+    <AssemblyName>CommunaCation</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CommunaCation\Socket\Command.cs" />
+    <Compile Include="CommunaCation\Socket\DMTcpClient.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CommunaCation\Socket\DMTcpServer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CommunaCation\Socket\DMUdpClient.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CommunaCation\Socket\IDataCell.cs" />
+    <Compile Include="CommunaCation\Socket\MsgCell.cs" />
+    <Compile Include="CommunaCation\Socket\MsgType.cs" />
+    <Compile Include="CommunaCation\Socket\MsgTypeCell.cs" />
+    <Compile Include="CommunaCation\Socket\ReceiveDataEventArgs.cs" />
+    <Compile Include="CommunaCation\Socket\ReceiveDataEventHandler.cs" />
+    <Compile Include="CommunaCation\Socket\ResponeTraFransfersFile.cs" />
+    <Compile Include="CommunaCation\Socket\SerHelper.cs" />
+    <Compile Include="CommunaCation\Socket\SocketError.cs" />
+    <Compile Include="CommunaCation\Socket\SocketState.cs" />
+    <Compile Include="CommunaCation\Socket\UdpLibrary.cs" />
+    <Compile Include="EComInfo.cs" />
+    <Compile Include="CommunaCation\Tool\HexTool.cs" />
+    <Compile Include="CommunaCation\SerialPort\MySerialPort.cs" />
+    <Compile Include="EComManageer.cs" />
+    <Compile Include="ECommunacation.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{77ed73e8-1d87-40a0-a37a-b5c1ee2ce586}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SysHelper\SysHelper.csproj">
+      <Project>{79be596b-aa63-4b18-8212-0145905965d3}</Project>
+      <Name>SysHelper</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

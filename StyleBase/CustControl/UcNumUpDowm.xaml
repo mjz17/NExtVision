@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="StyleBase.UcNumUpDowm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:StyleBase"
+             mc:Ignorable="d" 
+             d:DesignHeight="40" d:DesignWidth="320">
+    <UserControl.Resources>
+        <ResourceDictionary Source="pack://application:,,,/StyleBase;component/FrmStyle.xaml"/>
+    </UserControl.Resources>
+
+    <Border Background="White">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="55"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock 
+                Grid.Row="0"
+                Text="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=numHeadName,Mode=TwoWay}"
+                Foreground="Black" 
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Left" 
+                Margin="2" 
+                FontSize="13"/>
+            <Grid Grid.Column="1">
+                <Slider x:Name="slider" 
+                        VerticalAlignment="Center" 
+                        IsMoveToPointEnabled="False"
+                        Minimum="{Binding RelativeSource={RelativeSource AncestorType=UserControl},Path=minSet}" 
+                        Maximum="{Binding RelativeSource={RelativeSource AncestorType=UserControl},Path=maxSet}" 
+                        SmallChange="{Binding RelativeSource={RelativeSource AncestorType=UserControl},Path=smallSet}"
+                        IsSnapToTickEnabled="True"
+                        TickFrequency="1"
+                        Value="{Binding RelativeSource={RelativeSource AncestorType=UserControl},Path=SliderValue}"       
+                        ValueChanged="slider_ValueChanged"/>
+            </Grid>
+            <Label Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Label.Content>
+                    <TextBlock FontSize="13" Text="{Binding ElementName=slider,Path=Value,StringFormat={}{0:F1}}"/>
+                </Label.Content>
+            </Label>
+            <Grid Grid.Column="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button 
+                    Style="{StaticResource DataLinkBtnStyle}" 
+                    Content="&#xe614;" 
+                    Width="25" 
+                    Height="25" 
+                    Foreground="Black" 
+                    Grid.Column="0" 
+                    FontSize="13"
+                    Name="btn_Add"
+                    Click="btn_Add_Click"/>
+                <Button 
+                    Style="{StaticResource DataLinkBtnStyle}" 
+                    Content="&#xe608;" 
+                    Width="25" 
+                    Height="25" 
+                    Foreground="Black" 
+                    Grid.Column="1" 
+                    FontSize="13"
+                    Name="btn_Reduce"
+                    Click="btn_Reduce_Click"/>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

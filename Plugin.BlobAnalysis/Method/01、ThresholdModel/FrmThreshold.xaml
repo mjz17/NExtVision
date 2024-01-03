@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="Plugin.BlobAnalysis.FrmThreshold"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Plugin.BlobAnalysis"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary Source="pack://application:,,,/StyleBase;component/FrmStyle.xaml"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="低阈值：" FontSize="13" VerticalContentAlignment="Center"/>
+            <TextBlock 
+                Foreground="Black"
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Center" 
+                Text="{Binding ElementName=Min_slider,Path=Value}" FontSize="13" Grid.Column="1"/>
+            <Slider Grid.Column="2"
+                    x:Name="Min_slider"
+                    VerticalAlignment="Center"
+                    Minimum="0"
+                    Maximum="255"
+                    IsSnapToTickEnabled="True"
+                    TickFrequency="1"
+                    IsMoveToPointEnabled="False"/>
+        </Grid>
+
+        <Grid Grid.Row="1" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="高阈值：" FontSize="13" VerticalContentAlignment="Center"/>
+            <TextBlock 
+                Foreground="Black"
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Center" 
+                Text="{Binding ElementName=Max_slider,Path=Value}" FontSize="13" Grid.Column="1"/>
+            <Slider Grid.Column="2"
+                    x:Name="Max_slider"
+                    VerticalAlignment="Center"
+                    Minimum="0"
+                    Maximum="255"
+                    IsSnapToTickEnabled="True"
+                    TickFrequency="1"
+                    IsMoveToPointEnabled="False"/>
+        </Grid>
+    </Grid>
+</UserControl>

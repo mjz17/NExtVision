@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="Plugin.BlobAnalysis.ImageUnion"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Plugin.BlobAnalysis"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary Source="pack://application:,,,/StyleBase;component/FrmStyle.xaml"/>
+    </UserControl.Resources>
+    <Grid Visibility="{Binding m_Control,Mode=TwoWay}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Content="使用索引" VerticalAlignment="Center" Grid.Column ="0"/>
+        <ComboBox Grid.Column="1" Height="30" Width="100" Name="Cmb_SelectIndex"/>
+    </Grid>
+</UserControl>

@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="StyleBase.TitleFrm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:StyleBase"
+             mc:Ignorable="d" 
+             d:DesignHeight="32" d:DesignWidth="600">
+    <UserControl.Resources>
+        <ResourceDictionary Source="pack://application:,,,/StyleBase;component/FrmStyle.xaml"/>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Border Height="32" VerticalAlignment="Center"  Name="border" MouseLeftButtonDown="border_MouseLeftButtonDown" Style="{StaticResource borderStyle}"/>
+        <Label Content="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=HeadName,Mode=TwoWay}" 
+               MouseLeftButtonDown="border_MouseLeftButtonDown"
+               Foreground="White" FontSize="13" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Style="{StaticResource WindowHeaderBtnStyle}" Height="30" Width="44" Content="&#xe729;"
+                    Name="btn_Min" Click="btn_Min_Click"
+                    Visibility="{Binding RelativeSource={RelativeSource AncestorType=UserControl},Path=MinVis}"/>
+            <Button Style="{StaticResource WindowHeaderBtnStyle}" Height="30" Width="44" Content="&#xe699;"
+                    Name="btn_Max" Click="btn_Max_Click"
+                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}"
+                    Visibility="{Binding RelativeSource={RelativeSource AncestorType=UserControl},Path=MaxVis}" />
+            <Button Style="{StaticResource WindowHeaderBtnStyle}" Height="30" Width="44" Content="&#xe60b;"
+                    Name="btn_Close" Click="btn_Close_Click" 
+                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}"
+                    Visibility="{Binding RelativeSource={RelativeSource AncestorType=UserControl},Path=CloseVis}" Margin="0 0 2 0"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="Plugin.ImageAreaReg.CameraMode"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Plugin.ImageAreaReg"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary Source="pack://application:,,,/StyleBase;component/FrmStyle.xaml"/>
+    </UserControl.Resources>
+    <Border>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="26"/>
+                <RowDefinition Height="34"/>
+            </Grid.RowDefinitions>
+            <!--表头-->
+            <Border Style="{StaticResource borderStyle}" Height="26" VerticalAlignment="Top" Grid.Row="0">
+                <TextBlock Text="采集模式" Foreground="White" VerticalAlignment="Center" Margin="5" HorizontalAlignment="Left" FontSize="13"/>
+            </Border>
+            <!--内容-->
+            <Border Grid.Row="1" Background="White">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <RadioButton 
+                        FontSize="13" 
+                        VerticalContentAlignment="Center" 
+                        HorizontalAlignment="Center" 
+                        Grid.Column="0"
+                        Content="指定图片"
+                        IsChecked="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=ImageCheck,Mode=TwoWay}" 
+                        Checked="RadioButton_Checked"/>
+                    <RadioButton 
+                        FontSize="13" 
+                        VerticalContentAlignment="Center" 
+                        HorizontalAlignment="Center" 
+                        Grid.Column="1"
+                        Content="文件目录"
+                        IsChecked="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=FileCheck,Mode=TwoWay}" 
+                        Checked="RadioButton_Checked"/>
+                    <RadioButton 
+                        FontSize="13" 
+                        VerticalContentAlignment="Center" 
+                        HorizontalAlignment="Center" 
+                        Grid.Column="2"
+                        Content="相机"
+                        IsChecked="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=CameraCheck,Mode=TwoWay}"                       
+                        Checked="RadioButton_Checked"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>
